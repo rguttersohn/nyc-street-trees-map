@@ -15,15 +15,14 @@ import { storeToRefs } from "pinia";
     const mapLoaded = computed(()=>mapGlobals.value.loaded);
     const treeStore = useTreeStore();
     const cdStore = useCDStore();
-    let {activeCD} = storeToRefs(cdStore);
     let {treeData} = storeToRefs(treeStore);
     let {getTreeData} = treeStore;
     onMounted(() => renderMap(mapGlobals.value, cdCoordinates['109'] ));
     
     watch(mapLoaded, ()=>{
       getTreeData();
-      renderCDMap(mapGlobals.value, activeCD);
-      addCDEvents(mapGlobals.value, store)
+      renderCDMap(mapGlobals.value, cdStore);
+      addCDEvents(mapGlobals.value, cdStore)
     })
 
 </script>

@@ -1,5 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 
 export const renderMap = ( globals, startingCoords ) => {
   mapboxgl.accessToken = 'pk.eyJ1Ijoicmd1dHRlcnNvaG4iLCJhIjoiY2s4bnBkMGcwMHd0bzNmbjJucWJ2djlqMSJ9.kxpUifvDwI9fG2YQD5THLQ';
@@ -21,7 +22,9 @@ export const renderMap = ( globals, startingCoords ) => {
   globals.map.on('load', () => (globals.loaded = true));
 };
 
-export const renderCDMap = (globals, activeCD)=>{
+export const renderCDMap = (globals, cdStore)=>{
+
+    let {activeCD} = cdStore;
 
     globals.map.addSource('community districts', {
       type:'geojson',
@@ -53,9 +56,10 @@ export const renderCDMap = (globals, activeCD)=>{
 
 }
 
-export const addCDEvents = (globals, store)=>{
+export const addCDEvents = (globals, cdStore)=>{
   
-  const activeCommunityDistrict = computed(()=>store.state.activeCommunityDistrict);
+  const {activeCD} = storeToRefs(cdStore);
+  const {setActiveCD} = cdStore;
   // const setActiveCommunityDistrict = (value) => store.commit('setActiveCommunityDistrict', value);
   // const resetOffset = () => store.commit('resetOffset');
   // const emptyTreeData = () => store.commit('emptyTreeData');
@@ -65,19 +69,20 @@ export const addCDEvents = (globals, store)=>{
 
   globals.map.on('click','community districts fill', event => {  
 
-    if(activeCommunityDistrict !== event.features[0].properties.BoroCD){
-      setActiveCommunityDistrict(event.features[0].properties.BoroCD);
-      resetOffset();
-      emptyTreeData();
-      getTreeData();
-      setSideBarTrue();
-      setActiveTab('cd');
+    if(activeCD !== event.features[0].properties.BoroCD){
+      
+      setActiveCD(event.features[0].properties.BoroCD);
+      // resetOffset();
+      // emptyTreeData();
+      // getTreeData();
+      // setSideBarTrue();
+      // setActiveTab('cd');
 
     }
   });
 
   globals.map.on('mouseenter', 'community districts fill', event => {
-    if(activeCommunityDistrict !== event.features[0].properties.boroCD){
+    if(activeCD !== event.features[0].properties.boroCD){
       globals.map.getCanvas().style.cursor = 'pointer';
     }
   });
