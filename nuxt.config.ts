@@ -12,7 +12,8 @@ export default defineNuxtConfig({
   runtimeConfig:{
     treesAPIKey: '',
     public: {
-      baseURL: ''
+      baseURL: '',
+      mapToken: '',
     }
   }
 })

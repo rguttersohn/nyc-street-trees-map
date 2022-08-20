@@ -3,7 +3,8 @@ import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 export const renderMap = ( globals, startingCoords ) => {
-  mapboxgl.accessToken = 'pk.eyJ1Ijoicmd1dHRlcnNvaG4iLCJhIjoiY2s4bnBkMGcwMHd0bzNmbjJucWJ2djlqMSJ9.kxpUifvDwI9fG2YQD5THLQ';
+  
+  mapboxgl.accessToken = useRuntimeConfig().public.mapToken;
 
   const map = new mapboxgl.Map({
     container: 'map-holder', // container ID
