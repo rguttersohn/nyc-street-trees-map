@@ -9,4 +9,10 @@ export default defineNuxtConfig({
     },
   },
   buildModules: ['@pinia/nuxt'],
+  runtimeConfig:{
+    treesAPIKey: '',
+    public: {
+      baseURL: ''
+    }
+  }
 })
