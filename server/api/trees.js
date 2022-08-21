@@ -5,7 +5,6 @@ export default async (request, response) => {
     const searchParams = url.searchParams;
     const apiToken = useRuntimeConfig().treesAPIKey;
     const currentOffset = searchParams.get('currentOffset');
-    console.log(currentOffset);
     const activeCommunityDistrict = searchParams.get('activeCommunityDistrict');
     const fetchURL = `https://data.cityofnewyork.us/resource/uvpi-gqnh.geojson?$$app_token=${apiToken}&$limit=5000&$offset=${currentOffset}&$select=tree_id,longitude,latitude,status,health&cb_num=${activeCommunityDistrict}`
     const data = await $fetch(fetchURL);

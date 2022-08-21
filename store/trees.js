@@ -19,7 +19,6 @@ export const useTreeStore = defineStore({
             let baseURL = useRuntimeConfig().public.baseURL;
             let cdStore = useCDStore();
             let {activeCD} = cdStore;
-            console.log(this.currentOffset);
             await fetch(`${baseURL}/api/trees?activeCommunityDistrict=${activeCD}&currentOffset=${this.currentOffset}`)
                 .then(response => response.json())
                 .then(data => data.features.forEach(feature=>this.treeData.features.push(feature)));
