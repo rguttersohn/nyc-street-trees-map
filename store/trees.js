@@ -20,6 +20,12 @@ export const useTreeStore = defineStore({
             fetch(`${baseURL}/api/trees?activeCommunityDistrict=${activeCD}&currentOffset=${this.currentOffset}`)
                 .then(response => response.json())
                 .then(data => this.treeData = data);
+        },
+        emptyTreeData(){
+            this.treeData = {};
+        },
+        resetOffSet(){
+            this.currentOffset = 0;
         }
     }
 })

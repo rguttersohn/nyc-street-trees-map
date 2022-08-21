@@ -22,7 +22,7 @@ import { storeToRefs } from "pinia";
     watch(mapLoaded, ()=>{
       getTreeData();
       renderCDMap(mapGlobals.value, cdStore);
-      addCDEvents(mapGlobals.value, cdStore)
+      addCDEvents(mapGlobals.value, cdStore, treeStore)
     })
 
 </script>

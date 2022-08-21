@@ -57,13 +57,13 @@ export const renderCDMap = (globals, cdStore)=>{
 
 }
 
-export const addCDEvents = (globals, cdStore)=>{
+export const addCDEvents = (globals, cdStore, treeStore)=>{
   
   const {activeCD} = storeToRefs(cdStore);
   const {setActiveCD} = cdStore;
-  // const setActiveCommunityDistrict = (value) => store.commit('setActiveCommunityDistrict', value);
-  // const resetOffset = () => store.commit('resetOffset');
-  // const emptyTreeData = () => store.commit('emptyTreeData');
+  const {resetOffset, emptyTreeData, getTreeData} = treeStore;
+  
+  
   // const getTreeData = () => store.dispatch('getTreeData');
   // const setSideBarTrue = () => store.commit('setSideBarTrue');
   // const setActiveTab = (tab) => store.commit('setActiveTab', tab);
@@ -73,9 +73,9 @@ export const addCDEvents = (globals, cdStore)=>{
     if(activeCD !== event.features[0].properties.BoroCD){
       
       setActiveCD(event.features[0].properties.BoroCD);
-      // resetOffset();
-      // emptyTreeData();
-      // getTreeData();
+      resetOffset();
+      emptyTreeData();
+      getTreeData();
       // setSideBarTrue();
       // setActiveTab('cd');
 
