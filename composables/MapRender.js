@@ -62,11 +62,8 @@ export const addCDEvents = (globals, cdStore, treeStore)=>{
   const {activeCD} = storeToRefs(cdStore);
   const {setActiveCD} = cdStore;
   const {resetOffset, emptyTreeData, getTreeData} = treeStore;
+  const {currentOffset} = storeToRefs(treeStore);
   
-  
-  // const getTreeData = () => store.dispatch('getTreeData');
-  // const setSideBarTrue = () => store.commit('setSideBarTrue');
-  // const setActiveTab = (tab) => store.commit('setActiveTab', tab);
 
   globals.map.on('click','community districts fill', event => {  
 
@@ -94,81 +91,40 @@ export const addCDEvents = (globals, cdStore, treeStore)=>{
 }
 
 
-export const refilterCDMap = (globals, store) =>{
-  const activeCommunityDistrict = store.state.activeCommunityDistrict;
+export const refilterCDMap = (globals, cdStore) =>{
+  let {activeCD} = cdStore;
       globals.map.setFilter(
         'community districts fill',
-        ['!=', 'BoroCD', parseInt(activeCommunityDistrict)]
+        ['!=', 'BoroCD', parseInt(activeCD)]
       )
 } 
 
-export const initPlotPoints = ( globals, store) => {
-    const activeFilter = computed(()=> store.state.activeFilter)
-    globals.map.addSource('trees', {
+export const initPlotPoints = ( globals, filtersStore) => {
+  let {activeFilter} = filtersStore;
+  
+  globals.map.addSource('trees', {
       type: 'geojson',
-      data: {},
-      cluster: true,
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+      cluster: false,
       clusterRadius: 60,
       buffer: 128,
-      clusterMaxZoom: 13
     });
     
-    globals.map.addLayer({
-      id: 'clustered-trees',
-      type: 'circle',
-      source: 'trees',
-      filter: ['has', 'point_count'],
-      paint: {
-        'circle-radius': [
-          'step',
-          ['get', 'point_count'],
-          8,
-          10,
-          20,
-          100,
-          30,
-          750,
-          40,
-        ],
-        'circle-color': [
-          'step',
-          ['get', 'point_count'],
-          '#c8d3cc',
-          100,
-          '#96b4a1',
-          500,
-          '#649678',
-          1000,
-          '#2e7851',
-        ],
-      },
-    });
-
-
+    
     globals.map.addLayer({
       id: 'unclustered-trees',
       type: 'circle',
       source: 'trees',
       filter: ['!', ['has', 'point_count']],
       paint: {
-        'circle-color': activeFilter.value.filterArray(),
+        'circle-color': activeFilter.filterArray,
         'circle-radius': 4,
       },
     });
 
-  
-
-    globals.map.addLayer({
-      id: 'cluster-count',
-      type: 'symbol',
-      source: 'trees',
-      filter: ['has', 'point_count'],
-      layout: {
-        'text-field': '{point_count_abbreviated}',
-        'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 12,
-      },
-    });
 
 }
 
@@ -177,9 +133,11 @@ export const resetPaint = (globals, store) =>{
   globals.map.setPaintProperty('unclustered-trees','circle-color', activeFilter.value.filterArray())
 }
     
-export const addData = (data, globals, store)=>{
+export const addData = (data, globals, treeStore)=>{
+  console.log(data);
+  let { increaseOffset } = treeStore;
   globals.map.getSource('trees').setData(data);
-  store.commit('increaseOffset');
+  increaseOffset();
 }
 
 
@@ -230,9 +188,10 @@ export const addPlotPointEvents = (globals, store) => {
 
 };
 
-export const recenterMap = (globals, coordinates) =>{
+export const recenterMap = (globals, cdStore) =>{
+  let {getActiveCDCoords} = cdStore;
   globals.map.flyTo({
-    center: coordinates,
+    center: getActiveCDCoords,
     zoom: 13
   })
 }

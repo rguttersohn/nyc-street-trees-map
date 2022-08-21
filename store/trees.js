@@ -5,26 +5,36 @@ import { useCDStore } from "./cd";
 export const useTreeStore = defineStore({
     id:'trees',
     state: ()=>({
-        treeData:{},
+        treeData:{
+            type: 'FeatureCollection',
+            features: [],
+        },
         currentOffset: 0,
         activeTree:{activeTreeID: 0},
        
     }),
     actions: {
         
-        getTreeData(){
+        async getTreeData(){
             let baseURL = useRuntimeConfig().public.baseURL;
-            
             let cdStore = useCDStore();
             let {activeCD} = cdStore;
-            fetch(`${baseURL}/api/trees?activeCommunityDistrict=${activeCD}&currentOffset=${this.currentOffset}`)
+            console.log(this.currentOffset);
+            await fetch(`${baseURL}/api/trees?activeCommunityDistrict=${activeCD}&currentOffset=${this.currentOffset}`)
                 .then(response => response.json())
-                .then(data => this.treeData = data);
+                .then(data => data.features.forEach(feature=>this.treeData.features.push(feature)));
+
         },
         emptyTreeData(){
-            this.treeData = {};
+            this.treeData = {
+                type: 'FeatureCollection',
+                features: [],
+            };
         },
-        resetOffSet(){
+        increaseOffset(){
+            this.currentOffset = this.currentOffset + 5000
+        },
+        resetOffset(){
             this.currentOffset = 0;
         }
     }

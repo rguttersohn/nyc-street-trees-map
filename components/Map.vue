@@ -1,9 +1,8 @@
 <script setup>
-import { renderMap } from "../composables/MapRender";
 import { onMounted, ref, watch, computed } from "vue";
-import cdCoordinates from "../composables/cdCoordinates";
 import { useTreeStore } from "../store/trees.js";
 import { useCDStore } from "../store/cd.js";
+import {useFiltersStore} from "../store/filters.js"
 import { storeToRefs } from "pinia";
 
     
@@ -15,14 +14,35 @@ import { storeToRefs } from "pinia";
     const mapLoaded = computed(()=>mapGlobals.value.loaded);
     const treeStore = useTreeStore();
     const cdStore = useCDStore();
-    let {treeData} = storeToRefs(treeStore);
+    const filtersStore = useFiltersStore();
+    let {treeData, currentOffset} = storeToRefs(treeStore);
     let {getTreeData} = treeStore;
-    onMounted(() => renderMap(mapGlobals.value, cdCoordinates['109'] ));
+    let {setActiveFilter} = filtersStore;
+    let {getActiveCDCoords} = cdStore;
+    let {activeCD} = storeToRefs(cdStore);
+
+    onMounted(() => renderMap(mapGlobals.value, getActiveCDCoords));
     
     watch(mapLoaded, ()=>{
       getTreeData();
       renderCDMap(mapGlobals.value, cdStore);
-      addCDEvents(mapGlobals.value, cdStore, treeStore)
+      addCDEvents(mapGlobals.value, cdStore, treeStore);
+      setActiveFilter('status');
+      initPlotPoints(mapGlobals.value, filtersStore);
+
+    })
+
+    watch(treeData, () => {
+      addData(treeData.value, mapGlobals.value, treeStore);
+    }, {deep: true});
+
+    watch(currentOffset, ()=>{
+      getTreeData();
+    });
+
+    watch(activeCD, () => {
+      refilterCDMap(mapGlobals.value, cdStore)
+      recenterMap( mapGlobals.value, cdStore)
     })
 
 </script>
