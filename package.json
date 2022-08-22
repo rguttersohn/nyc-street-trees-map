@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "start": "node server.js",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
