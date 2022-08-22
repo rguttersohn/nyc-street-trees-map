@@ -134,7 +134,6 @@ export const resetPaint = (globals, store) =>{
 }
     
 export const addData = (data, globals, treeStore)=>{
-  console.log(data);
   let { increaseOffset } = treeStore;
   globals.map.getSource('trees').setData(data);
   increaseOffset();
