@@ -57,13 +57,12 @@ export const renderCDMap = (globals, cdStore)=>{
 
 }
 
-export const addCDEvents = (globals, cdStore, treeStore)=>{
+export const addCDEvents = (globals, cdStore, treeStore, sideBarStore)=>{
   
   const {activeCD} = storeToRefs(cdStore);
   const {setActiveCD} = cdStore;
   const {resetOffset, emptyTreeData, getTreeData} = treeStore;
-  const {currentOffset} = storeToRefs(treeStore);
-  
+  const {setSideBarTrue, setActiveTab} = sideBarStore;
 
   globals.map.on('click','community districts fill', event => {  
 
@@ -73,8 +72,8 @@ export const addCDEvents = (globals, cdStore, treeStore)=>{
       resetOffset();
       emptyTreeData();
       getTreeData();
-      // setSideBarTrue();
-      // setActiveTab('cd');
+      setSideBarTrue();
+      setActiveTab('cd');
 
     }
   });
@@ -141,10 +140,9 @@ export const addData = (data, globals, treeStore)=>{
 export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
 
    
-    const {setSideBarTrue, toggleSideBar} = sideBarStore;
+    const {setSideBarTrue, toggleSideBar, setActiveTab} = sideBarStore;
     const {getActiveTreeData, setActiveTreeID} = treeStore;
     const {activeTreeID} = storeToRefs(treeStore);
-    // const setActiveTab = (tab) => store.commit('setActiveTab', tab);
 
   
     globals.map.on('click', (event) => {
@@ -160,7 +158,7 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
         setActiveTreeID(features[0].properties.tree_id)
         getActiveTreeData();
         setSideBarTrue();
-        // setActiveTab('tree');
+        setActiveTab('tree');
         globals.lastTreeID = activeTreeID;
       } else {
         toggleSideBar();

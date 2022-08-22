@@ -4,6 +4,7 @@ export const useSideBarStore = defineStore({
     id: 'sidebar',
     state: ()=>({
         sideBarActive: false,
+        activeTab: 'cd',
     }),
     actions: {
         toggleSideBar(){
@@ -15,5 +16,8 @@ export const useSideBarStore = defineStore({
         setSideBarFalse(){
             this.sideBarActive = false;
         },
+        setActiveTab(value){
+            this.activeTab = value;
+        }
     }
 })

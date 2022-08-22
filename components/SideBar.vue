@@ -1,5 +1,6 @@
 
 <script setup>
+import { resolveComponent } from 'vue';
 import { useTreeStore } from '~~/store/trees';
 import { useSideBarStore } from '~~/store/sidebar';
 import { storeToRefs } from 'pinia';
@@ -8,15 +9,11 @@ import { storeToRefs } from 'pinia';
     let treeStore = useTreeStore();
     let sideBarStore = useSideBarStore();
     let {activeTreeData} = storeToRefs(treeStore);
-    let {sideBarActive} = storeToRefs(sideBarStore);
-    let {setSideBarFalse} = sideBarStore;
-    
-    // const activeTab = computed(()=>store.state.activeTab)
-    // const setActiveTab = (event) => {
-    //       store.commit('setActiveTab', event.target.dataset.tabName)
-    // }
+    let {sideBarActive, activeTab} = storeToRefs(sideBarStore);
+    let {setSideBarFalse, setActiveTab} = sideBarStore;
 
-
+    let LazySidebarCDTab = resolveComponent('LazySidebarCDTab');
+    let LazySidebarTreeTab = resolveComponent('LazySidebarTreeTab');
 </script>
 <template>
   <div
@@ -25,7 +22,19 @@ import { storeToRefs } from 'pinia';
   >
     <div v-if="sideBarActive">
       <button @click="setSideBarFalse" class="block mx-auto mb-10 px-3 py-1 cursor-pointer border border-light-100 rounded-lg">Close Sidebar</button>
-      <SidebarTreeTab/>
+      <div class="flex justify-evenly mb-10">
+      <h3 
+        :class="{'hover:underline cursor-pointer' : activeTab !== 'cd', 'underline' : activeTab === 'cd'}"
+        @click="setActiveTab('cd')"
+        data-tab-name="cd"
+        >Community District</h3>
+      <h3
+        :class="{'hover:underline cursor-pointer' : activeTab !== 'tree', 'underline' : activeTab === 'tree'}"
+        @click="setActiveTab('tree')"
+        data-tab-name="tree"
+        >Tree</h3>
+    </div>
+        <component :is="activeTab === 'cd' ? LazySidebarCDTab : LazySidebarTreeTab" ></component>
   </div>
   </div>
   

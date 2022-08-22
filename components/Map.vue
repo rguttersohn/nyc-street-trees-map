@@ -28,7 +28,7 @@ import { storeToRefs } from "pinia";
     watch(mapLoaded, ()=>{
       getTreeData();
       renderCDMap(mapGlobals.value, cdStore);
-      addCDEvents(mapGlobals.value, cdStore, treeStore);
+      addCDEvents(mapGlobals.value, cdStore, treeStore, sideBarStore);
       setActiveFilter('status');
       initPlotPoints(mapGlobals.value, filtersStore);
       addPlotPointEvents(mapGlobals.value, treeStore, sideBarStore);

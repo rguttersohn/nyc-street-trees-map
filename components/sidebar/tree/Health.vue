@@ -7,7 +7,6 @@ let treeStore = useTreeStore();
 let {activeTreeData} = storeToRefs(treeStore);
 const problems = computed(()=> activeTreeData.value.problems ? activeTreeData.value.problems.split(',') : ['Not Recorded'])
 
-console.log(activeTreeData.value)
 </script>
 
  <template>
