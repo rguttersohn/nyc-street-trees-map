@@ -6,7 +6,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "heroku-postbuild": "yarn build",
-    "start":"node server.mjs"
+    "start":"node ./dist/server/server.mjs"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
