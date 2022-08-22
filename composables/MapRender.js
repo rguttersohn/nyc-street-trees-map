@@ -140,32 +140,14 @@ export const addData = (data, globals, treeStore)=>{
 }
 
 
-export const addPlotPointEvents = (globals, store) => {
-    const setSideBarTrue = ()=>store.commit('setSideBarTrue');
-    const toggleSideBar = ()=> store.commit('toggleSideBar');
-    const getActiveTreeData = (clickedTreeID)=>store.dispatch('getActiveTreeData', clickedTreeID);
-    const setActiveTab = (tab) => store.commit('setActiveTab', tab);
+export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
 
-    globals.map.on('click', 'clustered-trees', (event) => {
-      
-      const features = globals.map.queryRenderedFeatures(event.point, {
-        layers: ['clustered-trees'],
-      });
+   
+    const {setSideBarTrue, toggleSideBar} = sideBarStore;
+    const {getActiveTree} = treeStore;
+    // const setActiveTab = (tab) => store.commit('setActiveTab', tab);
 
-      const clusterId = features[0].properties.cluster_id;
-
-      globals.map
-        .getSource('trees')
-        .getClusterExpansionZoom(clusterId, (err, zoom) => {
-          if (err) return;
-
-          globals.map.easeTo({
-            center: features[0].geometry.coordinates,
-            zoom: zoom,
-          });
-        });
-    });
-
+  
     globals.map.on('click', (event) => {
       const features = globals.map.queryRenderedFeatures(event.point, {
         layers: ['unclustered-trees'],
@@ -176,9 +158,9 @@ export const addPlotPointEvents = (globals, store) => {
       }
 
       if (features[0].properties.tree_id !== globals.lastTreeID) {
-        getActiveTreeData(features[0].properties.tree_id)
+        getActiveTree(features[0].properties.tree_id)
         setSideBarTrue();
-        setActiveTab('tree');
+        // setActiveTab('tree');
         globals.lastTreeID = features[0].properties.tree_id;
       } else {
         toggleSideBar();

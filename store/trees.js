@@ -24,6 +24,19 @@ export const useTreeStore = defineStore({
                 .then(data => data.features.forEach(feature=>this.treeData.features.push(feature)));
 
         },
+        async getActiveTree(clickedTreeID){
+
+            let baseURL = useRuntimeConfig().public.baseURL;
+
+            commit('setClickedTreeID', clickedTreeID)
+            let {activeTreeID} = this.activeTree;
+            fetchURL = `${baseURL}api/tree?active_tree_id=${activeTreeID}`;
+            await fetch(fetchURL)
+            .then(response => response.json())
+            .then(fetchedTreeData => {
+                Object.assign(this.activeTree, fetchedTreeData)
+            })
+        },
         emptyTreeData(){
             this.treeData = {
                 type: 'FeatureCollection',

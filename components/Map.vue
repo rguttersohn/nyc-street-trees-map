@@ -2,7 +2,8 @@
 import { onMounted, ref, watch, computed } from "vue";
 import { useTreeStore } from "../store/trees.js";
 import { useCDStore } from "../store/cd.js";
-import {useFiltersStore} from "../store/filters.js"
+import {useFiltersStore} from "../store/filters.js";
+import { useSideBarStore } from "~~/store/sidebar";
 import { storeToRefs } from "pinia";
 
     
@@ -15,6 +16,7 @@ import { storeToRefs } from "pinia";
     const treeStore = useTreeStore();
     const cdStore = useCDStore();
     const filtersStore = useFiltersStore();
+    const sideBarStore = useSideBarStore();
     let {treeData, currentOffset} = storeToRefs(treeStore);
     let {getTreeData} = treeStore;
     let {setActiveFilter} = filtersStore;
@@ -29,6 +31,7 @@ import { storeToRefs } from "pinia";
       addCDEvents(mapGlobals.value, cdStore, treeStore);
       setActiveFilter('status');
       initPlotPoints(mapGlobals.value, filtersStore);
+      addPlotPointEvents(mapGlobals.value, treeStore, sideBarStore);
 
     })
 
