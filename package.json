@@ -4,8 +4,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "heroku-post-build": "yarn build"
+    "preview": "nuxt preview"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
