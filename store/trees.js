@@ -32,9 +32,7 @@ export const useTreeStore = defineStore({
             let fetchURL = `${baseURL}/api/tree?active_tree_id=${this.activeTreeID}`;
             await fetch(fetchURL)
             .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                this.activeTreeData = data[0]})
+            .then(data => this.activeTreeData = data[0])
         },
         setActiveTreeID(value){
             this.activeTreeID = value

@@ -51,8 +51,5 @@ import { storeToRefs } from "pinia";
 </script>
 
 <template>
-  <div
-    class="h-screen w-full"
-    id="map-holder"
-  ></div>
+  <div class="h-full w-full" id="map-holder"></div>
 </template>

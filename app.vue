@@ -1,6 +1,7 @@
 <template>
   <main class="w-screen h-screen flex relative">
-    <Map/>
-    <Filter/>
+    <Map />
+    <SideBar />
+    <Filter />
   </main>
 </template>
