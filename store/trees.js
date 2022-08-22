@@ -10,7 +10,8 @@ export const useTreeStore = defineStore({
             features: [],
         },
         currentOffset: 0,
-        activeTree:{activeTreeID: 0},
+        activeTreeData: {},
+        activeTreeID: 0,
        
     }),
     actions: {
@@ -24,18 +25,19 @@ export const useTreeStore = defineStore({
                 .then(data => data.features.forEach(feature=>this.treeData.features.push(feature)));
 
         },
-        async getActiveTree(clickedTreeID){
+        async getActiveTreeData(){
 
             let baseURL = useRuntimeConfig().public.baseURL;
 
-            commit('setClickedTreeID', clickedTreeID)
-            let {activeTreeID} = this.activeTree;
-            fetchURL = `${baseURL}api/tree?active_tree_id=${activeTreeID}`;
+            let fetchURL = `${baseURL}/api/tree?active_tree_id=${this.activeTreeID}`;
             await fetch(fetchURL)
             .then(response => response.json())
-            .then(fetchedTreeData => {
-                Object.assign(this.activeTree, fetchedTreeData)
-            })
+            .then(data => {
+                console.log(data);
+                this.activeTreeData = data[0]})
+        },
+        setActiveTreeID(value){
+            this.activeTreeID = value
         },
         emptyTreeData(){
             this.treeData = {

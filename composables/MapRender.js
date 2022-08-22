@@ -124,8 +124,6 @@ export const initPlotPoints = ( globals, filtersStore) => {
         'circle-radius': 4,
       },
     });
-
-
 }
 
 export const resetPaint = (globals, store) =>{
@@ -144,7 +142,8 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
 
    
     const {setSideBarTrue, toggleSideBar} = sideBarStore;
-    const {getActiveTree} = treeStore;
+    const {getActiveTreeData, setActiveTreeID} = treeStore;
+    const {activeTreeID} = storeToRefs(treeStore);
     // const setActiveTab = (tab) => store.commit('setActiveTab', tab);
 
   
@@ -152,16 +151,17 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
       const features = globals.map.queryRenderedFeatures(event.point, {
         layers: ['unclustered-trees'],
       });
-      
+
       if (!features.length) {
         return;
       }
 
       if (features[0].properties.tree_id !== globals.lastTreeID) {
-        getActiveTree(features[0].properties.tree_id)
+        setActiveTreeID(features[0].properties.tree_id)
+        getActiveTreeData();
         setSideBarTrue();
         // setActiveTab('tree');
-        globals.lastTreeID = features[0].properties.tree_id;
+        globals.lastTreeID = activeTreeID;
       } else {
         toggleSideBar();
       }

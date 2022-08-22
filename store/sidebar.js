@@ -5,15 +5,15 @@ export const useSideBarStore = defineStore({
     state: ()=>({
         sideBarActive: false,
     }),
-    action: {
+    actions: {
         toggleSideBar(){
             this.sideBarActive = !this.sideBarActive;
         },
         setSideBarTrue(){
-            this.sideBarActive = true
+            this.sideBarActive = true;
         },
         setSideBarFalse(){
-            this.sideBarActive = false
+            this.sideBarActive = false;
         },
     }
 })
