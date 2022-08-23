@@ -64,12 +64,17 @@ export const useCDStore = defineStore({
             '501': [-74.0873, 40.6326],
             '502': [-74.1585, 40.5909],
             '503': [-74.1946, 40.5373]
-        }
+        },
+        cdTreeHistory: {}
     }),
     actions:{
         setActiveCD(value){
             this.activeCD = value
         },
+       async getCDTreeHistory(value){
+            let baseURL = useRuntimeConfig().public.baseURL;
+            this.cdTreeHistory = await $fetch(`${baseURL}/api/cd?active_cd=${value.value}`)
+        }
        
     },
     getters: {

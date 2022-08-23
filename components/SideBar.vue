@@ -1,6 +1,5 @@
 
 <script setup>
-import { resolveComponent } from 'vue';
 import { useTreeStore } from '~~/store/trees';
 import { useSideBarStore } from '~~/store/sidebar';
 import { storeToRefs } from 'pinia';

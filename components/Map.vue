@@ -20,7 +20,7 @@ import { storeToRefs } from "pinia";
     let {treeData, currentOffset} = storeToRefs(treeStore);
     let {getTreeData} = treeStore;
     let {setActiveFilter} = filtersStore;
-    let {getActiveCDCoords} = cdStore;
+    let {getActiveCDCoords, getCDTreeHistory} = cdStore;
     let {activeCD} = storeToRefs(cdStore);
 
     onMounted(() => renderMap(mapGlobals.value, getActiveCDCoords));
@@ -44,8 +44,9 @@ import { storeToRefs } from "pinia";
     });
 
     watch(activeCD, () => {
-      refilterCDMap(mapGlobals.value, cdStore)
-      recenterMap( mapGlobals.value, cdStore)
+      refilterCDMap(mapGlobals.value, cdStore);
+      recenterMap( mapGlobals.value, cdStore);
+      getCDTreeHistory(activeCD);
     })
 
 </script>
