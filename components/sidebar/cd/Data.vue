@@ -9,9 +9,12 @@ const chartGlobal = ref({
   chart:{}
 });
 
-onMounted(()=> makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value, '#ea0029'))
 
-watch(cdTreeHistory,()=>updateLineChart(chartGlobal.value, cdTreeHistory.value))
+watch(cdTreeHistory,(oldval, newval)=>{
+  
+  makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value, '#ea0029');
+  // updateLineChart(chartGlobal.value, cdTreeHistory.value);
+})
 
 </script>
 <template>

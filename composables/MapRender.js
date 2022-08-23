@@ -125,9 +125,9 @@ export const initPlotPoints = ( globals, filtersStore) => {
     });
 }
 
-export const resetPaint = (globals, store) =>{
-  const activeFilter = computed(()=>store.state.activeFilter);
-  globals.map.setPaintProperty('unclustered-trees','circle-color', activeFilter.value.filterArray())
+export const resetPaint = (globals, filtersStore) =>{
+  let {activeFilter} = storeToRefs(filtersStore);
+  globals.map.setPaintProperty('unclustered-trees','circle-color', activeFilter.value.filterArray)
 }
     
 export const addData = (data, globals, treeStore)=>{

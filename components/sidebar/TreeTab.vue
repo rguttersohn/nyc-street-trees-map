@@ -11,7 +11,7 @@ import { useTreeStore } from '~~/store/trees';
        <SidebarTreeInfo/>
        <SidebarTreeSurroundingArea/>
    </div>
-   <div v="else">
+   <div v-else>
     <h3 class="text-center">Click on a tree to display data</h3>
    </div>
 </template>

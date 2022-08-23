@@ -20,6 +20,7 @@ import { storeToRefs } from "pinia";
     let {treeData, currentOffset} = storeToRefs(treeStore);
     let {getTreeData} = treeStore;
     let {setActiveFilter} = filtersStore;
+    let {activeFilter} = storeToRefs(filtersStore);
     let {getActiveCDCoords, getCDTreeHistory} = cdStore;
     let {activeCD} = storeToRefs(cdStore);
 
@@ -47,6 +48,10 @@ import { storeToRefs } from "pinia";
       refilterCDMap(mapGlobals.value, cdStore);
       recenterMap( mapGlobals.value, cdStore);
       getCDTreeHistory(activeCD);
+    })
+
+    watch(activeFilter, ()=>{
+      resetPaint(mapGlobals.value, filtersStore)
     })
 
 </script>
