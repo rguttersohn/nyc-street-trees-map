@@ -7,8 +7,8 @@ import { useTreeStore } from '~~/store/trees';
  </script>
  <template>
    <div v-if="Object.keys(activeTreeData).length > 0">
+      <SidebarTreeInfo/>
        <SidebarTreeHealth/>
-       <SidebarTreeInfo/>
        <SidebarTreeSurroundingArea/>
    </div>
    <div v-else>

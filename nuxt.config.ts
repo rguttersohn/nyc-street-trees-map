@@ -15,5 +15,8 @@ export default defineNuxtConfig({
       baseURL: '',
       mapToken: '',
     }
+  },
+  head: {
+    css:['https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css']
   }
 })
