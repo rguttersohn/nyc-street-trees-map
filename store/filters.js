@@ -6,7 +6,7 @@ export const useFiltersStore = defineStore({
         filters: [
             {
                 filterName:'status',
-                colors:['green', 'coral', 'red'],
+                colors:['#22C55E', '#EAB308', '#EF4444'],
                 keys:['Alive', 'Dead', 'Stump'],
                 get filterArray(){ return [ 
                     'match',
@@ -23,7 +23,7 @@ export const useFiltersStore = defineStore({
             },
             {
                 filterName: 'health',
-                colors: ['purple','blue','orange','gray'],
+                colors: ['#BE123C','#FB7185','#FECDD3','#64748B'],
                 keys: ['Good', 'Fair', 'Poor','Dead'],
                 get filterArray(){ return [ 
                     'match',

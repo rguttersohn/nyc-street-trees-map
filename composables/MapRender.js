@@ -38,7 +38,7 @@ export const renderCDMap = (globals, cdStore)=>{
       source: 'community districts',
       layout: {},
       paint: {
-        'fill-color' : '#0099cd',
+        'fill-color' : '#3B82F6',
         'fill-opacity' : 0.3,
       },
       'filter': ['!=', 'BoroCD', parseInt(activeCD)]
@@ -164,6 +164,16 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
         toggleSideBar();
       }
     });
+
+    globals.map.on('mouseenter', 'unclustered-trees', () => {
+      globals.map.getCanvas().style.cursor = 'pointer';
+    });
+
+    globals.map.on('mouseleave', 'unclustered-trees', () => {
+      globals.map.getCanvas().style.cursor = '';
+    });
+
+   
 
 };
 

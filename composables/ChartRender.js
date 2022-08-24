@@ -4,6 +4,7 @@ export const makeLineChart = (chartGlobal, id, data, color)=>{
 
     const options = { 
         series: [{
+            name: 'Trees',
             data: Object.values(data.series)
         }],
         chart:{
@@ -11,7 +12,7 @@ export const makeLineChart = (chartGlobal, id, data, color)=>{
             toolbar: {
                 show: false
             },
-            width:'100%',
+            width:'90%',
             height:'150px'
         },
         stroke: {
@@ -24,24 +25,75 @@ export const makeLineChart = (chartGlobal, id, data, color)=>{
         },
         xaxis: {
             categories: Object.values(data.categories),
-            tickAmount: 3,
         },
         yaxis: {
             labels: {
                 formatter: function (value){
                     return value.toLocaleString()
                 }
-            }},
-        colors:[color]
+            },
+        },
+        colors:color,
+        dataLabels:{
+            enabled:true,
+            formatter: function (value){
+                return value.toLocaleString()
+            },
+            textAnchor:'left',
+            offsetX:-3
+        },
+        tooltip:{
+            enabled:false
+        }
     }
 
     const chart = new ApexCharts(id, options)
-    chartGlobal.chart = chart;
+    chartGlobal.lineChart = chart;
     chart.render()
 }
 
 export const updateLineChart = (chartGlobal, data)=>{
-    chartGlobal.chart.updateSeries([{
+    chartGlobal.lineChart.updateSeries([{
         data: Object.values(data.series)
     }])
+}
+
+export const makeBarChart = (chartGlobal, id, data, color)=>{
+
+    const options = { 
+        series: data,
+        chart:{
+            stacked: true,
+            type:'bar',
+            toolbar: {
+                show: false
+            },
+            width:'90%',
+            height:'350px'
+        },
+        yaxis: {
+            show:false,
+        },
+        xaxis:{
+            categories:['2015'],
+        },
+        colors:color,
+        dataLabels:{
+            enabled:true,
+            formatter: function (value){
+                return value.toLocaleString()
+            },
+        },
+        tooltip:{
+            enabled:false
+        }
+    }
+
+    const chart = new ApexCharts(id, options)
+    chartGlobal.barChart = chart;
+    chart.render()
+}
+
+export const updateBarChart = (chartGlobal, data)=>{
+    chartGlobal.barChart.updateSeries(data)
 }
