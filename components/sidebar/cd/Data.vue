@@ -23,13 +23,11 @@ watch(cdTreeHistory,()=>{
 
 </script>
 <template>
-  <div class="bg-blue-50 rounded-lg p-3 text-center">
     <h2 class="text-center font-bold my-5 text-blue-600">Community District {{ activeCD }}</h2>
     <h3 class="text-blue-600">
       Street trees counted in Community District {{ activeCD }} in 1995, 2005, and 2015
     </h3>
-    <div id="chart-trees-all"></div>
+    <div class="w-full mx-auto" id="chart-trees-all"></div>
     <h3 class="mt-10 text-blue-600">Street trees by status (Show/hide categories by clicking on the legend.)</h3>
-    <div id="chart-trees-status"></div>
-  </div>
+    <div class="w-5/6 mx-auto" id="chart-trees-status"></div>
 </template>

@@ -62,7 +62,7 @@ export const addCDEvents = (globals, cdStore, treeStore, sideBarStore)=>{
   const {activeCD} = storeToRefs(cdStore);
   const {setActiveCD} = cdStore;
   const {resetOffset, emptyTreeData, getTreeData} = treeStore;
-  const {setSideBarTrue, setActiveTab} = sideBarStore;
+  const {setActiveTab} = sideBarStore;
 
   globals.map.on('click','community districts fill', event => {  
 
@@ -72,7 +72,6 @@ export const addCDEvents = (globals, cdStore, treeStore, sideBarStore)=>{
       resetOffset();
       emptyTreeData();
       getTreeData();
-      setSideBarTrue();
       setActiveTab('cd');
 
     }

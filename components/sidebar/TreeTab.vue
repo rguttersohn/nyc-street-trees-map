@@ -1,13 +1,14 @@
- <script setup>
- import { storeToRefs } from 'pinia';
-import { useTreeStore } from '~~/store/trees';
+<script setup>
+   import { storeToRefs } from 'pinia';
+   import { useTreeStore } from '~~/store/trees';
 
- let treeStore = useTreeStore();
- let {activeTreeData} = storeToRefs(treeStore);
- </script>
+   let treeStore = useTreeStore();
+   let {activeTreeData} = storeToRefs(treeStore);
+</script>
+
  <template>
    <div v-if="Object.keys(activeTreeData).length > 0" 
-      class="bg-blue-50 rounded-lg p-3 text-center"
+      class="overflow-scroll h-5/6 py-3 bg-blue-50 p-3 text-center"
    >
       <SidebarTreeInfo/>
        <SidebarTreeHealth/>

@@ -12,7 +12,7 @@ export const makeLineChart = (chartGlobal, id, data, color)=>{
             toolbar: {
                 show: false
             },
-            width:'90%',
+            width:'100%',
             height:'150px'
         },
         stroke: {
@@ -68,7 +68,7 @@ export const makeBarChart = (chartGlobal, id, data, color)=>{
             toolbar: {
                 show: false
             },
-            width:'90%',
+            width:'100%',
             height:'350px'
         },
         yaxis: {
