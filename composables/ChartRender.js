@@ -87,13 +87,16 @@ export const makeBarChart = (chartGlobal, id, data, color)=>{
         tooltip:{
             enabled:false
         }
+
     }
 
     const chart = new ApexCharts(id, options)
     chartGlobal.barChart = chart;
     chart.render()
+
 }
 
 export const updateBarChart = (chartGlobal, data)=>{
     chartGlobal.barChart.updateSeries(data)
+
 }

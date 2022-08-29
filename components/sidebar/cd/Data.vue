@@ -10,20 +10,15 @@ const chartGlobal = ref({
   barChart:{}
 });
 
-let cdTreeHistoryWatchIndex = 0;
+onMounted(()=>{
+  makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value['all'], ['#22C55E']);
+    makeBarChart(chartGlobal.value, document.querySelector('#chart-trees-status'), cdTreeHistory.value['status'], ['#22C55E', '#EAB308','#EF4444']);
+})
+
 
 watch(cdTreeHistory,()=>{
-
-  if(cdTreeHistoryWatchIndex === 0){
-    makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value['all'], ['#22C55E']);
-    makeBarChart(chartGlobal.value, document.querySelector('#chart-trees-status'), cdTreeHistory.value['status'], ['#22C55E', '#EAB308','#EF4444']);
-
-  } else {
     updateLineChart(chartGlobal.value, cdTreeHistory.value['all']);
     updateBarChart(chartGlobal.value, cdTreeHistory.value['status'])
-  }
-
-  cdTreeHistoryWatchIndex++;
 })
 
 </script>

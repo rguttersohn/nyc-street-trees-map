@@ -38,7 +38,9 @@ import { storeToRefs } from 'pinia';
         data-tab-name="tree"
         >Tree Information</h3>
     </div>
-        <component :is="activeTab === 'cd' ? LazySidebarCDTab : LazySidebarTreeTab" ></component>
+        <KeepAlive>
+          <component :is="activeTab === 'cd' ? LazySidebarCDTab : LazySidebarTreeTab" ></component>
+        </KeepAlive>
   </div>
   </div>
   
