@@ -11,7 +11,7 @@ const chartGlobal = ref({
 });
 
 onMounted(()=>{
-  makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value['all'], ['#22C55E']);
+    makeLineChart(chartGlobal.value, document.querySelector('#chart-trees-all'), cdTreeHistory.value['all'], ['#22C55E']);
     makeBarChart(chartGlobal.value, document.querySelector('#chart-trees-status'), cdTreeHistory.value['status'], ['#22C55E', '#EAB308','#EF4444']);
 })
 
