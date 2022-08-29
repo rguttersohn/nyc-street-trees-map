@@ -8,7 +8,7 @@
 
  <template>
    <div v-if="Object.keys(activeTreeData).length > 0" 
-      class="overflow-scroll h-5/6 py-3 bg-blue-50 p-3 text-center"
+      class="overflow-scroll h-4/6 md:h-5/6 py-3 bg-blue-50 p-3 text-center"
    >
       <SidebarTreeInfo/>
        <SidebarTreeHealth/>

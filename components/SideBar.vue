@@ -15,8 +15,8 @@ let SidebarTreeTab = resolveComponent("LazySidebarTreeTab");
 </script>
 <template>
   <div
-    :class="{ 'h-28 md:h-20': !sideBarActive, 'h-2/4 md:h-5/6': sideBarActive }"
-    class="absolute bottom-0 md:right-0 md:top-0 mr-5 mt-5 w-full md:w-1/4 transition-height duration-300 p-3 border-2 border-light-900 rounded-lg bg-white"
+    :class="{ 'h-28 md:h-20': !sideBarActive, 'h-4/6 md:h-5/6': sideBarActive }"
+    class="absolute bottom-0 md:right-0 md:top-0 md:mr-5 md:mt-5 w-full md:w-1/4 transition-height duration-300 p-3 border-2 border-light-900 rounded-lg bg-white"
   >
     <SidebarButton />
     <div v-if="sideBarActive" class="h-full">
