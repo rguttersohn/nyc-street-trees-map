@@ -11,8 +11,8 @@ import { storeToRefs } from 'pinia';
     let {sideBarActive, activeTab} = storeToRefs(sideBarStore);
     let {setSideBarFalse, setActiveTab, toggleSideBar} = sideBarStore;
 
-    let LazySidebarCDTab = resolveComponent('LazySidebarCDTab');
-    let LazySidebarTreeTab = resolveComponent('LazySidebarTreeTab');
+    let SidebarCDTab = resolveComponent('LazySidebarCDTab');
+    let SidebarTreeTab = resolveComponent('LazySidebarTreeTab');
 </script>
 <template>
   <div
@@ -39,7 +39,7 @@ import { storeToRefs } from 'pinia';
         >Tree Information</h3>
     </div>
         <KeepAlive>
-          <component :is="activeTab === 'cd' ? LazySidebarCDTab : LazySidebarTreeTab" ></component>
+          <component :is="activeTab === 'cd' ? SidebarCDTab : SidebarTreeTab" ></component>
         </KeepAlive>
   </div>
   </div>

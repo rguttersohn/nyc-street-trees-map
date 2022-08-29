@@ -33,6 +33,7 @@ import { storeToRefs } from "pinia";
       setActiveFilter('status');
       initPlotPoints(mapGlobals.value, filtersStore);
       addPlotPointEvents(mapGlobals.value, treeStore, sideBarStore);
+      getCDTreeHistory(activeCD);
 
     })
 
