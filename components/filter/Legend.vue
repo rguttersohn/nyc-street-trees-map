@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 
     const filtersStore = useFiltersStore();
     const {activeFilter} = storeToRefs(filtersStore);
-            
+    
 </script>
 
 <template>
