@@ -4,11 +4,11 @@ import { storeToRefs } from 'pinia';
 
     const filtersStore = useFiltersStore();
     const {activeFilter} = storeToRefs(filtersStore);
-    
 </script>
 
 <template>
-    <div class="w-10/12 mx-auto my-5 flex flex-row justify-evenly items-center gap-x-3">
+    <div class="w-10/12 mx-auto my-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
+        <p class=" basis-full text-center mb-3">Tree {{activeFilter.filterName}}:</p>
         <div 
             v-for="(filterKey, index) in activeFilter.keys" 
             :key="index" 

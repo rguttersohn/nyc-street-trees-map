@@ -21,10 +21,10 @@ const togglePanelActive = ()=>{
 
         </button>
         <KeepAlive>
-            <FilterSelectCD :panelActive="filterPanelActive"/>
+            <FilterSelectCD v-if="filterPanelActive" />
         </KeepAlive>
         <KeepAlive>
-            <FilterSelectFilter :panelActive="filterPanelActive" />
+            <FilterSelectFilter v-if="filterPanelActive"  />
         </KeepAlive>
         
         

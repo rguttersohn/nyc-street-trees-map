@@ -22,14 +22,11 @@ import { useTreeStore } from "~~/store/trees"
                 getTreeData();
             }
 
-            const props = defineProps({
-                panelActive: Boolean
-            })
- 
+
 </script>
 
 <template>
-     <div v-if="props.panelActive" class="w-full overflow-x-hidden">
+     <div class="w-full overflow-x-hidden">
          <h3>Select a community district:</h3>
            <select class="border-2 border-light-100" ref="select" @change="selectCD" >
                <optgroup label="Manhattan">
