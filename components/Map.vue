@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted, ref, watch, computed } from "vue";
 import { useTreeStore } from "../store/trees.js";
 import { useCDStore } from "../store/cd.js";
 import {useFiltersStore} from "../store/filters.js";
@@ -58,5 +57,5 @@ import { storeToRefs } from "pinia";
 </script>
 
 <template>
-  <div class="h-screen w-screen" id="map-holder"></div>
+  <section class="h-screen w-screen" id="map-holder"></section>
 </template>

@@ -10,18 +10,12 @@ import { useTreeStore } from "~~/store/trees"
             const {setActiveCD} = cdStore;
             const {resetOffset, emptyTreeData, getTreeData} = treeStore;
 
-            // watch(activeCD, ()=>{
-            //     select.value.value = 'test'
-            //     console.log(select.value.value);
-            // })
-
             const selectCD = (event)=>{
                 setActiveCD(event.target.value);
                 resetOffset();
                 emptyTreeData();
                 getTreeData();
             }
-
 
 </script>
 

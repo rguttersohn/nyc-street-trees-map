@@ -11,11 +11,11 @@ const specie = computed(() => activeTreeData.value.spc_common ? activeTreeData.v
 
 <template>
     <div class="my-3">
-        <h3 class="font-bold text-blue-600">Species:</h3>
+        <h3 class="font-bold">Species:</h3>
         <p>{{ specie }}</p>
     </div>
     <div class="my-3">
-        <h3 class="font-bold text-blue-600">Address:</h3>
+        <h3 class="font-bold">Address:</h3>
         <p>{{ activeTreeData.address }}</p>
     </div>
 </template>

@@ -16,31 +16,37 @@ let cdStore = useCDStore();
 
 let {activeCD} = storeToRefs(cdStore);
 let { activeTreeData } = storeToRefs(treeStore);
-let { sideBarActive, activeTab } = storeToRefs(sideBarStore);
+let { sideBarActive, tabs, activeTab } = storeToRefs(sideBarStore);
 let { setSideBarFalse, toggleSideBar } = sideBarStore;
 
-let SidebarCDTab = resolveComponent("LazySidebarCDTab");
-let SidebarTreeTab = resolveComponent("LazySidebarTreeTab");
+const tabComponents = {
+  cd: resolveComponent("LazySidebarCDTrends"),
+  tree: resolveComponent("LazySidebarTreeInfo"),
+  options: resolveComponent("LazySidebarOptions"),
+}
+
+
 </script>
 <template>
-  <div
-    :class="{ 'h-28 md:h-40': !sideBarActive, 'h-4/6 md:h-5/6': sideBarActive }"
-    class="absolute bottom-0 md:right-0 md:top-0 md:mr-5 md:mt-5 w-full md:w-1/4 transition-height duration-300 p-3 border-2 border-light-900 rounded-lg bg-white"
+  <section
+    :class="{ 'overflow-hidden h-48 md:h-48 drop-shadow-sm': !sideBarActive, 'overflow-scroll h-[66vh] md:h-[75vh] drop-shadow-2xl': sideBarActive }"
+    class="absolute top-0 md:right-0 md:top-0 md:mr-5 md:mt-5 w-full md:w-1/4 transition-height duration-300 border-2 border-light-900 rounded-none md:rounded-lg bg-white"
   >
-    <h2 class="text-center">Community District {{activeCD}}</h2>
-    <SidebarLegend/>
-    <SidebarButton />
-    <div v-if="sideBarActive" class="h-full">
-      <div class="flex justify-evenly">
-        <SidebarTab tabName="cd" :imageSrc="cdTrendsImage">Community Disrict Trends</SideBarTab>
-        <SidebarTab tabName="tree" :imageSrc="treeInfoImage">Tree Info</SideBarTab>
-        <SidebarTab tabName="options" :imageSrc="optionsImage">Options</SideBarTab>
-      </div>
+    <div class="h-full">
+      <header class="sticky top-0 bg-white z-10">
+        <h2>Community District {{activeCD}}</h2>
+        <SidebarLegend/>
+        <nav class="flex justify-evenly gap-x-1">
+          <SidebarTab tabName="cd" :imageSrc="cdTrendsImage">Trends</SideBarTab>
+          <SidebarTab tabName="tree" :imageSrc="treeInfoImage">Tree Info</SideBarTab>
+          <SidebarTab tabName="options" :imageSrc="optionsImage">Options</SideBarTab>
+        </nav>
+      </header>
       <KeepAlive>
-        <component
-          :is="activeTab === 'cd' ? SidebarCDTab : SidebarTreeTab"
-        ></component>
+        <Transition>
+          <component :is="tabComponents[activeTab]"></component> 
+        </Transition>
       </KeepAlive>
     </div>
-  </div>
+  </section>
 </template>

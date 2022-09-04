@@ -7,8 +7,8 @@ import { storeToRefs } from 'pinia';
 </script>
 
 <template>
-    <div class="w-10/12 mx-auto my-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
-        <p class=" basis-full text-center mb-3">Tree {{activeFilter.filterName}}:</p>
+    <div class="w-10/12 mx-auto mt-2 mb-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
+        <h3 class=" basis-full text-center mb-3">Tree {{activeFilter.filterName}}:</h3>
         <div 
             v-for="(filterKey, index) in activeFilter.keys" 
             :key="index" 

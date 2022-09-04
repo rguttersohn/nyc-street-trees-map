@@ -9,7 +9,7 @@ let {activeTreeData} = storeToRefs(treeStore)
 
 <template>
     <div class="my-3">
-        <h3 class="mb-1 font-bold text-blue-600">Surrounding Area:</h3>
+        <h3 class="mb-1 font-bold">Surrounding Area:</h3>
         <p>Sidewalk Damage: <span>{{ activeTreeData.sidewalk }}</span></p>
         <p>Guards: <span>{{ activeTreeData.guards }}</span></p>
         <p>Curb Location: <span>{{ activeTreeData.curb_loc }}</span></p>

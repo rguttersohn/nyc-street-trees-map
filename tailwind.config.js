@@ -11,7 +11,9 @@ module.exports = {
       transitionProperty:{
         'width': 'width',
         'height': 'height',
-      }
+        'p':'padding'
+      },
+      
     },
   },
   plugins: [],
