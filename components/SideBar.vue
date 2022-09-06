@@ -42,11 +42,11 @@ const tabComponents = {
           <SidebarTab tabName="options" :imageSrc="optionsImage">Options</SideBarTab>
         </nav>
       </header>
-      <KeepAlive>
-        <Transition>
-          <component :is="tabComponents[activeTab]"></component> 
-        </Transition>
-      </KeepAlive>
+      <Transition>
+        <KeepAlive>
+            <component :is="tabComponents[activeTab]"></component>
+        </KeepAlive>
+      </Transition>
     </div>
   </section>
 </template>

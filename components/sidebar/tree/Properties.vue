@@ -16,14 +16,14 @@ const specie = computed(() => activeTreeData.value.spc_common ? activeTreeData.v
 </script>
 
 <template>
-    <div class="my-3">
-        <img :src="treeIcon" alt="icon of a tree" class="block mx-auto">
-        <h3 class="font-bold">Species:</h3>
-        <p>{{ specie }}</p>
-    </div>
-    <div class="my-3">
-        <img :src="apartmentIcon" alt="icon of a tree" class="block mx-auto">
-        <h3 class="font-bold">Address:</h3>
-        <p>{{ activeTreeData.address }}</p>
-    </div>
+        <div class="my-3">
+            <img :src="treeIcon" alt="icon of a tree" class="block mx-auto">
+            <h3 class="font-bold">Species:</h3>
+            <p>{{ specie }}</p>
+        </div>
+        <div class="my-3">
+            <img :src="apartmentIcon" alt="icon of a tree" class="block mx-auto">
+            <h3 class="font-bold">Address:</h3>
+            <p class="capitalize">{{ activeTreeData.address.toLowerCase() }}</p>
+        </div>
 </template>
