@@ -3,22 +3,25 @@
         header: String,
         icon: String,
         altText: String,
-        treesData: Array
+        treeData: Array,
+        color: String,
     })
 </script>
 
 <template>
     <div class="my-3">
-        <h3>{{props.header}}</h3>
-        <img :src="props.icon" alt="" class="block mx-auto">
+        <img :src="props.icon" :alt="props.altText" class="block mx-auto">
+        <h4 class="font-semibold" v-if="props.header">{{props.header}}</h4>
         <ul>
             <li 
-                v-for="(treeData, index) in props.treesData" 
+                v-for="({key, value}, index) in props.treeData" 
                 :key="index"
                 class="capitalize"
                 >
-                <h3>{{treeData.key}}:</h3>
-                <p>{{treeData.value}}</p>
+                <h4 class="font-semibold"
+                :class="props.color"
+                >{{key}}:</h4> 
+                <h4>{{value}}</h4>
             </li>
         </ul>
     </div>
