@@ -4,12 +4,13 @@
    import {useSideBarStore} from '~~/store/sidebar';
 
    // images
-   import treeIcon from '~/assets/img/nature_FILL0_wght400_GRAD0_opsz48.svg';
-   import apartmentIcon from '~/assets/img/apartment_FILL0_wght400_GRAD0_opsz48.svg';
-   import rulerIcon from '~/assets/img/straighten_FILL0_wght400_GRAD0_opsz48.svg';
-   import monitorIcon from '~/assets/img/monitor_heart_FILL0_wght400_GRAD0_opsz48.svg';
-   import problemIcon from '~/assets/img/error_FILL0_wght400_GRAD0_opsz48.svg';
-   import statusIcon from '~/assets/img/status.svg'
+   import treeIcon from '~/assets/img/tree.svg';
+   import apartmentIcon from '~/assets/img/apartment.svg';
+   import rulerIcon from '~/assets/img/ruler.svg';
+   import monitorIcon from '~/assets/img/monitor.svg';
+   import problemIcon from '~/assets/img/error.svg';
+   import statusIcon from '~/assets/img/status.svg';
+   import addressIcon from '~/assets/img/address.svg'
    
 
    let sideBarStore = useSideBarStore();
@@ -17,9 +18,16 @@
    let {activeTreeData} = storeToRefs(treeStore);
    let {sideBarActive} = storeToRefs(sideBarStore);
 
-   // computed props
+   // helpers
+   const titleToWords = (text)=>{
+      const separateWords = text.replace(/([A-Z])/g, " $1");
+      return separateWords;
+   }   // computed props
    const specie = computed(() => activeTreeData.value.spc_common ? activeTreeData.value.spc_common[0].toUpperCase() + activeTreeData.value.spc_common.slice(1) : 'Not recorded');
-   const problems = computed(()=> activeTreeData.value.problems ? activeTreeData.value.problems : 'Not Recorded')
+   const problems = computed(()=> activeTreeData.value.problems ? titleToWords(activeTreeData.value.problems) : 'Not Recorded');
+   const trunkDiameter = computed(()=> activeTreeData.value.tree_dbh ? activeTreeData.value.tree_dbh + ' inches' : '');
+   const stumpDiameter = computed(()=> activeTreeData.value.stump_dbh ? activeTreeData.value.stump_dbh + ' inches' : '');
+
 
 </script>
 
@@ -35,32 +43,28 @@
                :icon="treeIcon" 
                altText="icon of a tree" 
                :treeData="[{key: 'Species', value: specie}]" 
-               color="text-green-500"
                />
             <SidebarTreeCard 
-               :icon="apartmentIcon" 
-               altText="icon of an apartment building"
+               :icon="addressIcon" 
+               altText="icon of at symbol"
                :treeData="[{key:'Address', value: activeTreeData.address.toLowerCase()}]"
                />
             <SidebarTreeCard
                :icon="statusIcon"
-               altText="icon of a bulleted list"
+               altText="icon of a falling leaf"
                :treeData="[{key:'Status', value: activeTreeData.status}]"
-               color="text-yellow-500"
             />
             <SidebarTreeCard
                v-show="activeTreeData.status === 'Alive'"
                :icon="monitorIcon"
                altText="icon of a heart monitor"
                :treeData="[{key:'Health', value: activeTreeData.health}]"
-               color="text-red-600"
             />
             <SidebarTreeCard
                v-show="activeTreeData.status === 'Alive' || activeTreeData.status === 'Dead'"
                :icon="rulerIcon"
                altText="icon of a ruler"
-               :treeData="[{key:'Trunk Diameter', value: activeTreeData.tree_dbh}]"
-               color="text-amber-600"
+               :treeData="[{key:'Trunk Diameter', value: trunkDiameter}]"
             />
             <SidebarTreeCard
                v-show="activeTreeData.status === 'Stump'"
@@ -78,10 +82,10 @@
                altText="icon of an error notification"
                header="Surrounding Area Status"
                :treeData="[
-                  {key:'Sidewalk Damage', value: activeTreeData.sidewalk},
-                  {key:'Guards', value: activeTreeData.guards},
-                  {key:'Curb Location', value: activeTreeData.curb_loc},
-                  {key:'Root Problem', value: activeTreeData.root_stone},
+                  {key:'Sidewalk Damage', value: titleToWords(activeTreeData.sidewalk)},
+                  {key:'Guards', value: titleToWords(activeTreeData.guards)},
+                  {key:'Curb Location', value: titleToWords(activeTreeData.curb_loc)},
+                  {key:'Root Problem', value: titleToWords(activeTreeData.root_stone)},
                   ]"
             />
          </div>

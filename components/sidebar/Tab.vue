@@ -25,10 +25,10 @@ import { storeToRefs } from 'pinia';
 <template>
     <button
           :class="{
-            'hover:bg-blue-50 cursor-pointer': activeTab !== props.tabName,
+            'hover:bg-green-50 cursor-pointer': activeTab !== props.tabName,
             'cursor-default': activeTab === props.tabName,
-            'bg-blue-50' : sideBarActive && activeTab === props.tabName,
-            'bg-none hover:bg-blue-50' : !sideBarActive
+            'bg-green-100' : sideBarActive && activeTab === props.tabName,
+            'bg-none hover:bg-green-50' : !sideBarActive
           }"
           class="w-full rounded-lg py-2 px-3 text-center"
           @click="handleTabClick"
