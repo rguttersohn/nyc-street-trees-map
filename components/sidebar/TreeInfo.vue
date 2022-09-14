@@ -18,16 +18,10 @@
    let {activeTreeData} = storeToRefs(treeStore);
    let {sideBarActive} = storeToRefs(sideBarStore);
 
-   // helpers
-   const titleToWords = (text)=>{
-      const separateWords = text.replace(/([A-Z])/g, " $1");
-      return separateWords;
-   }   // computed props
+   // computed props
    const specie = computed(() => activeTreeData.value.spc_common ? activeTreeData.value.spc_common[0].toUpperCase() + activeTreeData.value.spc_common.slice(1) : 'Not recorded');
-   const problems = computed(()=> activeTreeData.value.problems ? titleToWords(activeTreeData.value.problems) : 'Not Recorded');
-   const trunkDiameter = computed(()=> activeTreeData.value.tree_dbh ? activeTreeData.value.tree_dbh + ' inches' : '');
-   const stumpDiameter = computed(()=> activeTreeData.value.stump_dbh ? activeTreeData.value.stump_dbh + ' inches' : '');
-
+   const problems = computed(()=> activeTreeData.value.problems ? activeTreeData.value.problems : 'Not Recorded');
+   const trunkDiameter = computed(()=> activeTreeData.value.status == 'Stump' ? activeTreeData.value.stump_diam + ' in' : activeTreeData.value.tree_dbh + ' in');
 
 </script>
 
@@ -46,7 +40,7 @@
                />
             <SidebarTreeCard 
                :icon="addressIcon" 
-               altText="icon of at symbol"
+               altText="icon of an at symbol"
                :treeData="[{key:'Address', value: activeTreeData.address.toLowerCase()}]"
                />
             <SidebarTreeCard
@@ -61,16 +55,9 @@
                :treeData="[{key:'Health', value: activeTreeData.health}]"
             />
             <SidebarTreeCard
-               v-show="activeTreeData.status === 'Alive' || activeTreeData.status === 'Dead'"
                :icon="rulerIcon"
                altText="icon of a ruler"
-               :treeData="[{key:'Trunk Diameter', value: trunkDiameter}]"
-            />
-            <SidebarTreeCard
-               v-show="activeTreeData.status === 'Stump'"
-               :icon="rulerIcon"
-               altText="icon of a ruler"
-               :treeData="[{key:'Stump Diameter', value: activeTreeData.stump_diam}]"
+               :treeData="activeTreeData.status == 'Stump' ? [{key:'Stump Diameter', value: trunkDiameter}] : [{key:'Trunk Diameter', value: trunkDiameter}]"
             />
             <SidebarTreeCard
                :icon="problemIcon"
@@ -82,10 +69,10 @@
                altText="icon of an error notification"
                header="Surrounding Area Status"
                :treeData="[
-                  {key:'Sidewalk Damage', value: titleToWords(activeTreeData.sidewalk)},
-                  {key:'Guards', value: titleToWords(activeTreeData.guards)},
-                  {key:'Curb Location', value: titleToWords(activeTreeData.curb_loc)},
-                  {key:'Root Problem', value: titleToWords(activeTreeData.root_stone)},
+                  {key:'Sidewalk Damage', value: activeTreeData.sidewalk},
+                  {key:'Guards', value: activeTreeData.guards},
+                  {key:'Curb Location', value: activeTreeData.curb_loc},
+                  {key:'Root Problem', value: activeTreeData.root_stone},
                   ]"
             />
          </div>

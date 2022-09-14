@@ -26,7 +26,6 @@ import { storeToRefs } from 'pinia';
     <button
           :class="{
             'hover:bg-green-50 cursor-pointer': activeTab !== props.tabName,
-            'cursor-default': activeTab === props.tabName,
             'bg-green-100' : sideBarActive && activeTab === props.tabName,
             'bg-none hover:bg-green-50' : !sideBarActive
           }"
