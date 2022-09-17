@@ -3,6 +3,9 @@
 import { storeToRefs } from 'pinia';
     import { useSideBarStore } from '~~/store/sidebar';
 
+    // images
+    import closeIcon from 'assets/img/close.svg'
+
     const sideBarStore = useSideBarStore();
     
     const {activeTab, sideBarActive} = storeToRefs(sideBarStore);
@@ -33,7 +36,11 @@ import { storeToRefs } from 'pinia';
           @click="handleTabClick"
           :data-tab-name="props.tabName"
         >
-            <img class="block mx-auto" style="height:20px;width:20px" :src="props.imageSrc">
-            <h4><slot></slot></h4>
+            <div v-show="props.tabName !== activeTab || !sideBarActive">
+                <img class="block mx-auto" style="height:20px;width:20px" :src="props.imageSrc">
+                <h4><slot></slot></h4>
+            </div>
+            <img v-show="props.tabName === activeTab && sideBarActive" :src="closeIcon" alt="icon of an X" class="block mx-auto" style="height:30px;width:30px">
+
         </button>
 </template>
