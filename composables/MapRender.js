@@ -11,7 +11,7 @@ export const renderMap = ( globals, startingCoords ) => {
     style: 'mapbox://styles/mapbox/light-v10?optimize=true',
     center: startingCoords, // starting position [lng, lat]
     zoom: 14, // starting zoom
-    maxZoom: 16,
+    maxZoom: 19,
     minZoom: 11
   });
 
@@ -119,7 +119,13 @@ export const initPlotPoints = ( globals, filtersStore) => {
       filter: ['!', ['has', 'point_count']],
       paint: {
         'circle-color': activeFilter.filterArray,
-        'circle-radius': 4,
+        'circle-radius': [
+          "interpolate", ["linear"],["zoom"],
+          12, 1,
+          13, 2, 
+          16, 4,
+          19, 8,
+      ],
       },
     });
 }
