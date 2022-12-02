@@ -5,7 +5,6 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "heroku-postbuild": "yarn build",
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
