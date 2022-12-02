@@ -1,6 +1,6 @@
 <script setup>
     import { propsToAttrMap } from '@vue/shared';
-import { storeToRefs } from 'pinia';
+    import { storeToRefs } from 'pinia';
     import { useSideBarStore } from '~~/store/sidebar';
 
     // images

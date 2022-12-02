@@ -46,3 +46,20 @@ span {
 .v-leave-to {
   opacity: 0;
 }
+
+.mapboxgl-popup-content{
+     width: 15rem;
+
+     #pop-up-content  {
+          button {
+               @apply text-base font-thin text-gray-700;
+          }
+     }
+
+     button.mapboxgl-popup-close-button {
+          @apply px-1 border-2 border-green-500 border-solid rounded-full  hover:bg-green-600 text-xl text-green-500  font-bold;
+     
+          }
+
+}
+

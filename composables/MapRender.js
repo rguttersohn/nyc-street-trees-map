@@ -1,5 +1,5 @@
+import { parserOptions } from '@vue/compiler-dom';
 import mapboxgl from 'mapbox-gl';
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 export const renderMap = ( globals, startingCoords ) => {
@@ -142,11 +142,11 @@ export const addData = (data, globals, treeStore)=>{
 }
 
 
-export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
+export const addPlotPointEvents = (globals, treeStore, sideBarStore, popupRef) => {
 
    
-    const {setSideBarTrue, toggleSideBar, setActiveTab} = sideBarStore;
-    const {getActiveTreeData, setActiveTreeID} = treeStore;
+    const {getActiveTreeData, setActiveTreeID, emptyActiveTreeData} = treeStore;
+    const {setSideBarFalse} = sideBarStore;
     const {activeTreeID} = storeToRefs(treeStore);
 
   
@@ -159,15 +159,34 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
         return;
       }
 
+      let {longitude, latitude} = features[0].properties
+
+      globals.map.flyTo({
+        center: [longitude,latitude],
+        zoom: 19,
+        padding: {top: 200},
+      })
+      const popup = new mapboxgl.Popup();
+      popup.setLngLat([longitude,latitude]);
+      popup.setDOMContent(popupRef);
+      popup.addTo(globals.map);
+
+      if(popup.isOpen()){
+        popupRef.classList.remove('hidden')
+      }
+
       if (features[0].properties.tree_id !== globals.lastTreeID) {
         setActiveTreeID(features[0].properties.tree_id)
         getActiveTreeData();
-        setSideBarTrue();
-        setActiveTab('tree');
         globals.lastTreeID = activeTreeID;
-      } else {
-        toggleSideBar();
       }
+
+      popup.on('close', ()=>{
+        emptyActiveTreeData()
+        setSideBarFalse();
+      })
+
+
     });
 
     globals.map.on('mouseenter', 'unclustered-trees', () => {
