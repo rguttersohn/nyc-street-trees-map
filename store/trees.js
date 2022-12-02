@@ -34,8 +34,11 @@ export const useTreeStore = defineStore({
             .then(response => response.json())
             .then(data => this.activeTreeData = data[0])
         },
+        emptyActiveTreeData(){
+            this.activeTreeData = {};
+        },
         setActiveTreeID(value){
-            this.activeTreeID = value
+            this.activeTreeID = value;
         },
         emptyTreeData(){
             this.treeData = {

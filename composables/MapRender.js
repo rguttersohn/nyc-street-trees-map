@@ -1,5 +1,5 @@
+import { parserOptions } from '@vue/compiler-dom';
 import mapboxgl from 'mapbox-gl';
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 
 export const renderMap = ( globals, startingCoords ) => {
@@ -11,7 +11,7 @@ export const renderMap = ( globals, startingCoords ) => {
     style: 'mapbox://styles/mapbox/light-v10?optimize=true',
     center: startingCoords, // starting position [lng, lat]
     zoom: 14, // starting zoom
-    maxZoom: 16,
+    maxZoom: 19,
     minZoom: 11
   });
 
@@ -119,7 +119,13 @@ export const initPlotPoints = ( globals, filtersStore) => {
       filter: ['!', ['has', 'point_count']],
       paint: {
         'circle-color': activeFilter.filterArray,
-        'circle-radius': 4,
+        'circle-radius': [
+          "interpolate", ["linear"],["zoom"],
+          12, 1,
+          13, 2, 
+          16, 4,
+          19, 8,
+      ],
       },
     });
 }
@@ -136,11 +142,11 @@ export const addData = (data, globals, treeStore)=>{
 }
 
 
-export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
+export const addPlotPointEvents = (globals, treeStore, sideBarStore, popupRef) => {
 
    
-    const {setSideBarTrue, toggleSideBar, setActiveTab} = sideBarStore;
-    const {getActiveTreeData, setActiveTreeID} = treeStore;
+    const {getActiveTreeData, setActiveTreeID, emptyActiveTreeData} = treeStore;
+    const {setSideBarFalse} = sideBarStore;
     const {activeTreeID} = storeToRefs(treeStore);
 
   
@@ -153,15 +159,34 @@ export const addPlotPointEvents = (globals, treeStore, sideBarStore) => {
         return;
       }
 
+      let {longitude, latitude} = features[0].properties
+
+      globals.map.flyTo({
+        center: [longitude,latitude],
+        zoom: 19,
+        padding: {top: 200},
+      })
+      const popup = new mapboxgl.Popup();
+      popup.setLngLat([longitude,latitude]);
+      popup.setDOMContent(popupRef);
+      popup.addTo(globals.map);
+
+      if(popup.isOpen()){
+        popupRef.classList.remove('hidden')
+      }
+
       if (features[0].properties.tree_id !== globals.lastTreeID) {
         setActiveTreeID(features[0].properties.tree_id)
         getActiveTreeData();
-        setSideBarTrue();
-        setActiveTab('tree');
         globals.lastTreeID = activeTreeID;
-      } else {
-        toggleSideBar();
       }
+
+      popup.on('close', ()=>{
+        emptyActiveTreeData()
+        setSideBarFalse();
+      })
+
+
     });
 
     globals.map.on('mouseenter', 'unclustered-trees', () => {
