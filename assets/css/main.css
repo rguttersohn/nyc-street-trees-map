@@ -57,7 +57,7 @@ span {
      }
 
      button.mapboxgl-popup-close-button {
-          @apply px-1 border-2 border-green-500 border-solid rounded-full  hover:bg-green-600 text-xl text-green-500  font-bold;
+          @apply flex flex-col justify-center w-7 h-7 border-2 border-green-500 border-solid rounded-full  hover:bg-green-600 text-xl text-green-500  font-bold;
      
           }
 
