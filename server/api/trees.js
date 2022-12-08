@@ -1,7 +1,6 @@
-
-export default async (request, response) => {
-    
-    const url = new URL(`${request.originalUrl}`, useRuntimeConfig().public.baseURL);
+const getTrees = async (event) => {
+    const {req} = event.node
+    const url = new URL(`${req.originalUrl}`, useRuntimeConfig().public.baseURL);
     const searchParams = url.searchParams;
     const apiToken = useRuntimeConfig().treesAPIKey;
     const currentOffset = searchParams.get('currentOffset');
@@ -12,6 +11,8 @@ export default async (request, response) => {
         data.features[i].geometry = {type: 'Point', 'coordinates' : []};
         data.features[i].geometry.coordinates.push(parseFloat(data.features[i].properties.longitude).toFixed(6), parseFloat(data.features[i].properties.latitude).toFixed(6));
 }
-    response.write(JSON.stringify(data))
-    response.end();
+    return data;
 }
+
+
+export default defineEventHandler(getTrees);
