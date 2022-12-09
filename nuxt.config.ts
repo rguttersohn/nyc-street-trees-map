@@ -2,14 +2,9 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   css: [
-    '~/assets/css/main.css',
+    '@/assets/css/main.css',
   ],
-  build: {
-    postcss: {
-      postcssOptions: require('./postcss.config.js'),
-    }
-  },
-  modules: ['@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss','@pinia/nuxt'],
   runtimeConfig: {
     treesAPIKey: '',
     public: {
