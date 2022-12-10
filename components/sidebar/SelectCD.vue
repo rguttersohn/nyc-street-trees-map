@@ -2,27 +2,56 @@
 import { storeToRefs } from "pinia";
 import { useCDStore } from "~~/store/cd";
 import { useTreeStore } from "~~/store/trees"
+// images
+import dropDown from '~/assets/img/dropdown.svg';
 
-            const select = ref(null);
-            const cdStore = useCDStore();
-            const treeStore = useTreeStore();
-            const  { activeCD } = storeToRefs(cdStore);
-            const {setActiveCD} = cdStore;
-            const {resetOffset, emptyTreeData, getTreeData} = treeStore;
+// store data
+    const select = ref(null);
+    const cdStore = useCDStore();
+    const treeStore = useTreeStore();
+    const  { activeCD } = storeToRefs(cdStore);
+    const {setActiveCD} = cdStore;
+    const {resetOffset, emptyTreeData, getTreeData} = treeStore;
 
-            const selectCD = (event)=>{
-                setActiveCD(event.target.value);
-                resetOffset();
-                emptyTreeData();
-                getTreeData();
-            }
+    
+
+    // local data
+
+    const cdSelectFieldShowing = ref(false);
+
+    function showCDSelectField (){
+        cdSelectFieldShowing.value = true;
+    }
+
+    function hideCDSelectField(){
+        cdSelectFieldShowing.value = false;
+    }
+
+    function selectCD (event){
+        setActiveCD(event.target.value);
+        resetOffset();
+        emptyTreeData();
+        getTreeData();
+        hideCDSelectField();
+    }
+
 
 </script>
 
 <template>
-     <div class="w-full overflow-x-hidden">
-         <h3>Select a community district:</h3>
-           <select class="border-2 border-light-100" ref="select" @change="selectCD" >
+     <div class="w-full mx-auto overflow-x-hidden">
+        <div 
+          @click="showCDSelectField"
+          class="w-3/4 mx-auto flex justify-around hover:bg-green-50 cursor-pointer"
+          >
+          <h2>Community District {{activeCD}}</h2>
+          <img :src="dropDown" alt="">
+        </div>
+           <select 
+                class="w-full mx-auto border-2 border-light-100 text-center"
+                :class="{'h-0' : !cdSelectFieldShowing}, {'h-full' : cdSelectFieldShowing}"
+                ref="select" 
+                @change="selectCD" >
                <optgroup label="Manhattan">
                    <option value="101">Financial District/Battery Park City/Tribeca</option>
                    <option value="102">Greenwich Village/Soho</option>

@@ -10,6 +10,8 @@ import cdTrendsImage from '~/assets/img/cdtrends.svg';
 import treeInfoImage from '~/assets/img/treeinfo.svg';
 import optionsImage from '~/assets/img/options.svg';
 
+
+// store data
 let treeStore = useTreeStore();
 let sideBarStore = useSideBarStore();
 let cdStore = useCDStore();
@@ -24,9 +26,8 @@ const tabComponents = {
   tree: resolveComponent("LazySidebarTreeInfo"),
   options: resolveComponent("LazySidebarOptions"),
 }
-
-
 </script>
+
 <template>
   <section
     :class="{ 'overflow-hidden h-48 md:h-48 drop-shadow-sm': !sideBarActive, 'overflow-scroll h-[66vh] md:h-[75vh] drop-shadow-2xl': sideBarActive }"
@@ -34,7 +35,7 @@ const tabComponents = {
   >
     <div class="h-full">
       <header class="sticky top-0 bg-white z-10">
-        <h2>Community District {{activeCD}}</h2>
+        <SidebarSelectCD/>
         <SidebarLegend/>
         <nav class="flex justify-evenly gap-x-1">
           <SidebarTab tabName="cd" :imageSrc="cdTrendsImage">Trends</SideBarTab>
