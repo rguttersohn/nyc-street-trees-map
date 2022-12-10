@@ -6,7 +6,6 @@ import { useTreeStore } from "~~/store/trees"
 import dropDown from '~/assets/img/dropdown.svg';
 
 // store data
-    const select = ref(null);
     const cdStore = useCDStore();
     const treeStore = useTreeStore();
     const  { activeCD } = storeToRefs(cdStore);
@@ -17,14 +16,14 @@ import dropDown from '~/assets/img/dropdown.svg';
 
     // local data
 
-    const cdSelectFieldShowing = ref(false);
+    const cdSelectListShowing = ref(false);
 
-    function showCDSelectField (){
-        cdSelectFieldShowing.value = true;
+    function toggleCDSelectList (){
+        cdSelectListShowing.value = !cdSelectListShowing.value;
     }
 
-    function hideCDSelectField(){
-        cdSelectFieldShowing.value = false;
+    function hideCDSelectList(){
+        cdSelectListShowing.value = false;
     }
 
     function selectCD (event){
@@ -32,7 +31,7 @@ import dropDown from '~/assets/img/dropdown.svg';
         resetOffset();
         emptyTreeData();
         getTreeData();
-        hideCDSelectField();
+        hideCDSelectList();
     }
 
 
@@ -41,86 +40,90 @@ import dropDown from '~/assets/img/dropdown.svg';
 <template>
      <div class="w-full mx-auto overflow-x-hidden">
         <div 
-          @click="showCDSelectField"
+          @click="toggleCDSelectList"
           class="w-3/4 mx-auto flex justify-around hover:bg-green-50 cursor-pointer"
           >
           <h2>Community District {{activeCD}}</h2>
           <img :src="dropDown" alt="">
         </div>
-           <select 
-                class="w-full mx-auto border-2 border-light-100 text-center"
-                :class="{'h-0' : !cdSelectFieldShowing}, {'h-full' : cdSelectFieldShowing}"
-                ref="select" 
+           <div
+                class="w-full mx-auto overflow-x-scroll border-2 border-light-100 text-center"
+                :class="{'h-0' : !cdSelectListShowing}, {'h-full' : cdSelectListShowing}"
                 @change="selectCD" >
-               <optgroup label="Manhattan">
-                   <option value="101">Financial District/Battery Park City/Tribeca</option>
-                   <option value="102">Greenwich Village/Soho</option>
-                   <option value="103">Lower Eastside/Chinatown</option>
-                   <option value="104">Clinton/Chelsea</option>
-                   <option value="105">Flatiron/Midtown</option>
-                   <option value="106">Gramercy/Murray Hill</option>
-                   <option value="107">Upper Westside</option>
-                   <option value="108">Upper Eastside</option>
-                   <option value="109">Morningside Heights/Hamilton Heights</option>
-                   <option value="110">Central Harlem</option>
-                   <option value="111">East Harlem</option>
-                   <option value="112">Washington Heights</option>
-                </optgroup>
-               <optgroup label="Bronx">
-                   <option value="201">Mott Haven</option>
-                   <option value="202">Hunts Point</option>
-                   <option value="203">Morrisania/Claremont Village</option>
-                   <option value="204">Concourse/High Bridge</option>
-                   <option value="205">Morris Heights/University Heights</option>
-                   <option value="206">East Tremont/Belmont</option>
-                   <option value="207">Bedord Park</option>
-                   <option value="208">Riverdale/Kingsbridge</option>
-                   <option value="209">Soundview</option>
-                   <option value="210">Throgs Neck/Schuylerville</option>
-                   <option value="211">Morris Park/Pelham Parkway</option>
-                   <option value="212">Williamsbridge/Wakefield</option>
-               </optgroup>
-               <optgroup label="Brooklyn">
-                    <option value="301">Greenpoint/Williamsburg</option>
-                    <option value="302">Brooklyn Heights/Downtown Brooklyn</option>
-                    <option value="303">Bedford-Stuyvesant</option>
-                    <option value="304">Bushwick</option>
-                    <option value="305">East New York</option>
-                    <option value="306">Gowanus/Carrol Gardens</option>
-                    <option value="307">Sunset Park</option>
-                    <option value="308">Prospect Heights/Crown Heights</option>
-                    <option value="309">Prospect Leffert Gardens</option>
-                    <option value="310">Bay Ridge</option>
-                    <option value="311">Bensonhurst</option>
-                    <option value="312">Borough Park</option>
-                    <option value="313">Brigton Beach/Coney Island</option>
-                    <option value="314">Midwood/Flatbush</option>
-                    <option value="315">Sheepshead Bay/Gravesend</option>
-                    <option value="316">Brownsville</option>
-                    <option value="317">East Flatbush</option>
-                    <option value="318">Canarsie/Flatlands</option>
-                </optgroup>
-                <optgroup label="Staten Island">
-                   <option value="501">North Shore</option>
-                   <option value="502">Heartland Village</option>
-                   <option value="503">South Shore</option>
-               </optgroup>
-               <optgroup label="Queens">
-                   <option value="401">Astoria</option>
-                   <option value="402">Sunnyside</option>
-                   <option value="403">Jackson Heights/East Elmhurst/North Corona</option>
-                   <option value="404">Elmhurst/South Corona</option>
-                   <option value="405">Ridgewood/Middle Village</option>
-                   <option value="406">Rego Park/Forest Hills</option>
-                   <option value="407">Flushing/Whitestone</option>
-                   <option value="408">Kew Gardens/Fresh Meadows</option>
-                   <option value="409">Woodhaven</option>
-                   <option value="410">Ozone Park</option>
-                   <option value="411">Oakland Gardens/Bayside</option>
-                   <option value="412">Jamaica</option>
-                   <option value="413">Floral Park/Queens Village/Cambria Heights</option>
-                   <option value="414">Rockaway/Breezy Point</option>
-               </optgroup>
-           </select>
+                <h4>Manhattan</h4>
+               <ul label="Manhattan" class="cd-select-list">
+                   <li data-cd="101">Financial District/Battery Park City/Tribeca</li>
+                   <li data-cd="102">Greenwich Village/Soho</li>
+                   <li data-cd="103">Lower Eastside/Chinatown</li>
+                   <li data-cd="104">Clinton/Chelsea</li>
+                   <li data-cd="105">Flatiron/Midtown</li>
+                   <li data-cd="106">Gramercy/Murray Hill</li>
+                   <li data-cd="107">Upper Westside</li>
+                   <li data-cd="108">Upper Eastside</li>
+                   <li data-cd="109">Morningside Heights/Hamilton Heights</li>
+                   <li data-cd="110">Central Harlem</li>
+                   <li data-cd="111">East Harlem</li>
+                   <li data-cd="112">Washington Heights</li>
+                </ul>
+                <h4>Bronx</h4>
+               <ul label="Bronx" class="cd-select-list">
+                   <li data-cd="201">Mott Haven</li>
+                   <li data-cd="202">Hunts Point</li>
+                   <li data-cd="203">Morrisania/Claremont Village</li>
+                   <li data-cd="204">Concourse/High Bridge</li>
+                   <li data-cd="205">Morris Heights/University Heights</li>
+                   <li data-cd="206">East Tremont/Belmont</li>
+                   <li data-cd="207">Bedord Park</li>
+                   <li data-cd="208">Riverdale/Kingsbridge</li>
+                   <li data-cd="209">Soundview</li>
+                   <li data-cd="210">Throgs Neck/Schuylerville</li>
+                   <li data-cd="211">Morris Park/Pelham Parkway</li>
+                   <li data-cd="212">Williamsbridge/Wakefield</li>
+               </ul>
+               <h4>Brooklyn</h4>
+               <ul label="Brooklyn" class="cd-select-list">
+                    <li data-cd="301">Greenpoint/Williamsburg</li>
+                    <li data-cd="302">Brooklyn Heights/Downtown Brooklyn</li>
+                    <li data-cd="303">Bedford-Stuyvesant</li>
+                    <li data-cd="304">Bushwick</li>
+                    <li data-cd="305">East New York</li>
+                    <li data-cd="306">Gowanus/Carrol Gardens</li>
+                    <li data-cd="307">Sunset Park</li>
+                    <li data-cd="308">Prospect Heights/Crown Heights</li>
+                    <li data-cd="309">Prospect Leffert Gardens</li>
+                    <li data-cd="310">Bay Ridge</li>
+                    <li data-cd="311">Bensonhurst</li>
+                    <li data-cd="312">Borough Park</li>
+                    <li data-cd="313">Brigton Beach/Coney Island</li>
+                    <li data-cd="314">Midwood/Flatbush</li>
+                    <li data-cd="315">Sheepshead Bay/Gravesend</li>
+                    <li data-cd="316">Brownsville</li>
+                    <li data-cd="317">East Flatbush</li>
+                    <li data-cd="318">Canarsie/Flatlands</li>
+                </ul>
+                <h4>Staten Island</h4>
+                <ul label="Staten Island" class="cd-select-list">
+                   <li data-cd="501">North Shore</li>
+                   <li data-cd="502">Heartland Village</li>
+                   <li data-cd="503">South Shore</li>
+               </ul>
+               <h4>Queens</h4>
+               <ul label="Queens" class="cd-select-list">
+                   <li data-cd="401">Astoria</li>
+                   <li data-cd="402">Sunnyside</li>
+                   <li data-cd="403">Jackson Heights/East Elmhurst/North Corona</li>
+                   <li data-cd="404">Elmhurst/South Corona</li>
+                   <li data-cd="405">Ridgewood/Middle Village</li>
+                   <li data-cd="406">Rego Park/Forest Hills</li>
+                   <li data-cd="407">Flushing/Whitestone</li>
+                   <li data-cd="408">Kew Gardens/Fresh Meadows</li>
+                   <li data-cd="409">Woodhaven</li>
+                   <li data-cd="410">Ozone Park</li>
+                   <li data-cd="411">Oakland Gardens/Bayside</li>
+                   <li data-cd="412">Jamaica</li>
+                   <li data-cd="413">Floral Park/Queens Village/Cambria Heights</li>
+                   <li data-cd="414">Rockaway/Breezy Point</li>
+               </ul>
+           </div>
      </div>
 </template>

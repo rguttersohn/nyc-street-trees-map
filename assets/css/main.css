@@ -63,3 +63,6 @@ span {
 
 }
 
+.cd-select-list li {
+     @apply cursor-pointer hover:bg-green-50 focus:bg-green-50;
+}
