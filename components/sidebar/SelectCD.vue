@@ -27,7 +27,13 @@ import dropDown from '~/assets/img/dropdown.svg';
     }
 
     function selectCD (event){
-        setActiveCD(event.target.value);
+        const {cd} = event.target.dataset
+
+        if(cd === activeCD.value){
+            return;
+        }
+
+        setActiveCD(event.target.dataset.cd);
         resetOffset();
         emptyTreeData();
         getTreeData();
@@ -38,7 +44,7 @@ import dropDown from '~/assets/img/dropdown.svg';
 </script>
 
 <template>
-     <div class="w-full mx-auto overflow-x-hidden">
+     <div class="w-full mx-auto overflow-x-scroll">
         <div 
           @click="toggleCDSelectList"
           class="w-3/4 mx-auto flex justify-around hover:bg-green-50 cursor-pointer"
@@ -49,9 +55,9 @@ import dropDown from '~/assets/img/dropdown.svg';
            <div
                 class="w-full mx-auto overflow-x-scroll border-2 border-light-100 text-center"
                 :class="{'h-0' : !cdSelectListShowing}, {'h-full' : cdSelectListShowing}"
-                @change="selectCD" >
+                 >
                 <h4>Manhattan</h4>
-               <ul label="Manhattan" class="cd-select-list">
+                <ul class="cd-select-list" @click="selectCD">
                    <li data-cd="101">Financial District/Battery Park City/Tribeca</li>
                    <li data-cd="102">Greenwich Village/Soho</li>
                    <li data-cd="103">Lower Eastside/Chinatown</li>
@@ -66,7 +72,7 @@ import dropDown from '~/assets/img/dropdown.svg';
                    <li data-cd="112">Washington Heights</li>
                 </ul>
                 <h4>Bronx</h4>
-               <ul label="Bronx" class="cd-select-list">
+                <ul class="cd-select-list" @click="selectCD">
                    <li data-cd="201">Mott Haven</li>
                    <li data-cd="202">Hunts Point</li>
                    <li data-cd="203">Morrisania/Claremont Village</li>
@@ -79,9 +85,9 @@ import dropDown from '~/assets/img/dropdown.svg';
                    <li data-cd="210">Throgs Neck/Schuylerville</li>
                    <li data-cd="211">Morris Park/Pelham Parkway</li>
                    <li data-cd="212">Williamsbridge/Wakefield</li>
-               </ul>
-               <h4>Brooklyn</h4>
-               <ul label="Brooklyn" class="cd-select-list">
+                </ul>
+                <h4>Brooklyn</h4>
+                <ul class="cd-select-list" @click="selectCD">
                     <li data-cd="301">Greenpoint/Williamsburg</li>
                     <li data-cd="302">Brooklyn Heights/Downtown Brooklyn</li>
                     <li data-cd="303">Bedford-Stuyvesant</li>
@@ -102,13 +108,13 @@ import dropDown from '~/assets/img/dropdown.svg';
                     <li data-cd="318">Canarsie/Flatlands</li>
                 </ul>
                 <h4>Staten Island</h4>
-                <ul label="Staten Island" class="cd-select-list">
+                <ul class="cd-select-list" @click="selectCD">
                    <li data-cd="501">North Shore</li>
                    <li data-cd="502">Heartland Village</li>
                    <li data-cd="503">South Shore</li>
-               </ul>
-               <h4>Queens</h4>
-               <ul label="Queens" class="cd-select-list">
+                </ul>
+                <h4>Queens</h4>
+                <ul class="cd-select-list" @click="selectCD">
                    <li data-cd="401">Astoria</li>
                    <li data-cd="402">Sunnyside</li>
                    <li data-cd="403">Jackson Heights/East Elmhurst/North Corona</li>
@@ -123,7 +129,7 @@ import dropDown from '~/assets/img/dropdown.svg';
                    <li data-cd="412">Jamaica</li>
                    <li data-cd="413">Floral Park/Queens Village/Cambria Heights</li>
                    <li data-cd="414">Rockaway/Breezy Point</li>
-               </ul>
+                </ul>
            </div>
      </div>
 </template>
