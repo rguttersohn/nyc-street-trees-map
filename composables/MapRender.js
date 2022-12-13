@@ -111,6 +111,7 @@ export const initPlotPoints = ( globals, filtersStore) => {
       buffer: 128,
     });
     
+    console.log(activeFilter.filterArray);
     
     globals.map.addLayer({
       id: 'unclustered-trees',

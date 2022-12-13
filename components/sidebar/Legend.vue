@@ -7,16 +7,18 @@ import { storeToRefs } from 'pinia';
 </script>
 
 <template>
-    <div class="w-10/12 mx-auto mt-2 mb-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
-        <h3 class=" basis-full text-center mb-3">Tree {{activeFilter.filterName}}:</h3>
-        <div 
+    <div class="w-full mx-auto my-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
+        <div class="flex gap-x-1 justify-evenly items-center">
+            <span class="mr-1">Tree {{activeFilter.filterName}}:</span>
+            <template
             v-for="(filterKey, index) in activeFilter.keys" 
             :key="index" 
-            class="flex gap-x-1 justify-evenly items-center">
-            <span>{{filterKey}}</span>
-            <span
-            :style="{backgroundColor: activeFilter.colors[index]}"
-            class="inline-block mx-1 w-[15px] h-[15px] rounded-full"></span>
+            >
+                <span>{{filterKey}}</span>
+                <span
+                :style="{backgroundColor: activeFilter.colors[index]}"
+                class="flex-shrink-0 inline-block mx-1 w-[10px] h-[10px] rounded-full"></span>
+            </template>
         </div>
     </div>
 </template>

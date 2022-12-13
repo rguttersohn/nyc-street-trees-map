@@ -5,12 +5,12 @@ export const useFiltersStore = defineStore({
     state: ()=>({
         filters: [
             {
-                filterName:'status',
+                filterName:'Status',
                 colors:['#22C55E', '#EAB308', '#EF4444'],
                 keys:['Alive', 'Dead', 'Stump'],
                 get filterArray(){ return [ 
                     'match',
-                    ['get', this.filterName],
+                    ['get', this.filterName.toLowerCase()],
                     this.keys[0],
                     this.colors[0],
                     this.keys[1],
@@ -22,12 +22,12 @@ export const useFiltersStore = defineStore({
                 }
             },
             {
-                filterName: 'health',
+                filterName: 'Health',
                 colors: ['#BE123C','#FB7185','#FECDD3','#64748B'],
                 keys: ['Good', 'Fair', 'Poor','Dead'],
                 get filterArray(){ return [ 
                     'match',
-                    ['get', this.filterName],
+                    ['get', this.filterName.toLowerCase()],
                     this.keys[0],
                     this.colors[0],
                     this.keys[1],

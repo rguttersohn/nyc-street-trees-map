@@ -35,7 +35,7 @@ import treeIcon from '~/assets/img/tree.svg';
       getTreeData();
       renderCDMap(mapGlobals.value, cdStore);
       addCDEvents(mapGlobals.value, cdStore, treeStore, sideBarStore);
-      setActiveFilter('status');
+      setActiveFilter('Status');
       initPlotPoints(mapGlobals.value, filtersStore);
       addPlotPointEvents(mapGlobals.value, treeStore, sideBarStore, htmlPopup.value);
       getCDTreeHistory(activeCD);

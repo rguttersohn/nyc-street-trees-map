@@ -30,7 +30,7 @@ const tabComponents = {
 
 <template>
   <section
-    :class="{ 'overflow-hidden h-48 md:h-48 drop-shadow-sm': !sideBarActive, 'overflow-scroll h-[66vh] md:h-[75vh] drop-shadow-2xl': sideBarActive }"
+    :class="{ 'overflow-hidden h-40 drop-shadow-sm': !sideBarActive, 'overflow-scroll h-[66vh] md:h-[75vh] drop-shadow-2xl': sideBarActive }"
     class="absolute top-0 md:right-0 md:top-0 md:mr-5 md:mt-5 w-full md:w-1/4 transition-height duration-300 border-2 border-light-900 rounded-none md:rounded-lg bg-white"
   >
     <div class="h-full">

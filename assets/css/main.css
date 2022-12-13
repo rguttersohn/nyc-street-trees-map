@@ -17,7 +17,7 @@ h2 {
      @apply text-xl font-bold text-center text-gray-700;
 }
 
-h3 {
+h3,select {
      @apply text-lg text-gray-700;
 }
 
@@ -63,3 +63,25 @@ span {
 
 }
 
+
+.cd-select-field {
+
+     @apply relative h-8 flex flex-col justify-center;
+
+
+     select {
+          @apply w-full mx-auto border-2 pt-4 pb-2 text-center bg-green-50;
+     }
+
+
+     &::after{
+
+          @apply absolute top-0 right-0 h-8 w-8 bg-white pointer-events-none;
+
+          content: '';
+          background-image: url('~/assets/img/dropdown.svg');
+          background-repeat: no-repeat;
+          background-position: center
+     }
+
+}
