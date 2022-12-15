@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia';
 </script>
 
 <template>
-    <div class="w-full mx-auto my-5 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
+    <div class="w-full mx-auto my-2 flex flex-row justify-evenly items-center flex-wrap gap-x-3">
         <div class="flex gap-x-1 justify-evenly items-center">
             <span class="mr-1">Tree {{activeFilter.filterName}}:</span>
             <template

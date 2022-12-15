@@ -33,6 +33,10 @@ span {
      @apply text-base text-gray-700;
 }
 
+label {
+     @apply text-sm text-gray-700
+}
+
 
 .v-enter-active {
   transition: opacity 0.3s ease-out;
@@ -66,22 +70,26 @@ span {
 
 .cd-select-field {
 
-     @apply relative h-8 flex flex-col justify-center;
+     @apply relative flex flex-col justify-center border border-solid bg-white border-green-600;
 
 
      select {
-          @apply w-full mx-auto border-2 pt-4 pb-2 text-center bg-green-50;
+          @apply w-full mx-auto border-2 bg-white border-none text-center focus:border-none font-bold text-green-600;
+         
      }
-
 
      &::after{
 
-          @apply absolute top-0 right-0 h-8 w-8 bg-white pointer-events-none;
+          @apply absolute right-0 h-6 w-6 pointer-events-none bg-white;
 
           content: '';
           background-image: url('~/assets/img/dropdown.svg');
           background-repeat: no-repeat;
-          background-position: center
+          background-position: center;
+          object-fit:contain
      }
+
+
+     
 
 }

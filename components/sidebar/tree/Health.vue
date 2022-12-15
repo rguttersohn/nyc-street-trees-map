@@ -8,10 +8,6 @@ import monitorIcon from '~/assets/img/monitor_heart_FILL0_wght400_GRAD0_opsz48.s
 import listIcon from '~/assets/img/format_list_bulleted_FILL0_wght400_GRAD0_opsz48.svg';
 import problemIcon from '~/assets/img/error_FILL0_wght400_GRAD0_opsz48.svg';
 
-
-
-
-
 let treeStore = useTreeStore();
 
 let {activeTreeData} = storeToRefs(treeStore);

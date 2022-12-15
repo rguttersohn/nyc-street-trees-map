@@ -29,8 +29,10 @@ import dropDown from '~/assets/img/dropdown.svg';
 
 <template>
      <div class="w-full mx-auto">
+        <label class="ml-2" for="select-cd">Select Community District</label>
         <div class="cd-select-field">
             <select
+            name="select-cd"
                 ref="select"
                 @change="selectCD" >
                 <optgroup label="Manhattan">
