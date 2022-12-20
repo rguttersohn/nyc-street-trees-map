@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import healthImage from '~/assets/img/health.png';
+import statusImage from '~/assets/img/status.png';
 
 export const useFiltersStore = defineStore({
     id:'filters',
@@ -6,6 +8,8 @@ export const useFiltersStore = defineStore({
         filters: [
             {
                 filterName:'Status',
+                id:'tree-status-button-label',
+                thumbnail: statusImage,
                 colors:['#22C55E', '#EAB308', '#EF4444'],
                 keys:['Alive', 'Dead', 'Stump'],
                 get filterArray(){ return [ 
@@ -23,6 +27,8 @@ export const useFiltersStore = defineStore({
             },
             {
                 filterName: 'Health',
+                id: 'tree-health-button-label',
+                thumbnail: healthImage,
                 colors: ['#BE123C','#FB7185','#FECDD3','#64748B'],
                 keys: ['Good', 'Fair', 'Poor','Dead'],
                 get filterArray(){ return [ 
