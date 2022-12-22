@@ -1,6 +1,23 @@
-import { parserOptions } from '@vue/compiler-dom';
 import mapboxgl from 'mapbox-gl';
 import { storeToRefs } from 'pinia';
+
+
+function cdRenderFilter (activeCD){
+  return ['all',
+    ['!=', 'BoroCD', parseInt(activeCD)],
+    ['!=', 'BoroCD', 164],
+    ['!=', 'BoroCD', 226],
+    ['!=', 'BoroCD', 227],
+    ['!=', 'BoroCD', 228],
+    ['!=', 'BoroCD', 355],
+    ['!=', 'BoroCD', 356],
+    ['!=', 'BoroCD', 480],
+    ['!=', 'BoroCD', 481],
+    ['!=', 'BoroCD', 482],
+    ['!=', 'BoroCD', 483],
+    ['!=', 'BoroCD', 484]
+  ]
+}
 
 export const renderMap = ( globals, startingCoords ) => {
   
@@ -41,7 +58,7 @@ export const renderCDMap = (globals, cdStore)=>{
         'fill-color' : '#3B82F6',
         'fill-opacity' : 0.3,
       },
-      'filter': ['!=', 'BoroCD', parseInt(activeCD)]
+      'filter': cdRenderFilter(activeCD)
     })
 
     globals.map.addLayer({
@@ -54,6 +71,33 @@ export const renderCDMap = (globals, cdStore)=>{
         'line-color' : '#0099cd'
       }
     })
+
+    globals.map.addLayer({
+      id: 'community districts parks fill',
+      type: 'fill',
+      source: 'community districts',
+      layout: {},
+      paint: {
+        'fill-color' : '#94a3b8',
+        'fill-opacity' : 0.3,
+      },
+      'filter':  ['any',
+        ['==', 'BoroCD', 164],
+        ['==', 'BoroCD', 226],
+        ['==', 'BoroCD', 227],
+        ['==', 'BoroCD', 228],
+        ['==', 'BoroCD', 355],
+        ['==', 'BoroCD', 356],
+        ['==', 'BoroCD', 480],
+        ['==', 'BoroCD', 481],
+        ['==', 'BoroCD', 482],
+        ['==', 'BoroCD', 483],
+        ['==', 'BoroCD', 484]
+    ]
+    })
+
+   
+
 
 }
 
@@ -93,7 +137,7 @@ export const refilterCDMap = (globals, cdStore) =>{
   let {activeCD} = cdStore;
       globals.map.setFilter(
         'community districts fill',
-        ['!=', 'BoroCD', parseInt(activeCD)]
+        cdRenderFilter(activeCD)
       )
 } 
 
@@ -111,7 +155,6 @@ export const initPlotPoints = ( globals, filtersStore) => {
       buffer: 128,
     });
     
-    console.log(activeFilter.filterArray);
     
     globals.map.addLayer({
       id: 'unclustered-trees',
