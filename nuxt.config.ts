@@ -13,6 +13,6 @@ export default defineNuxtConfig({
     },
   },
   routeRules:{
-    '/' : {prerender: true}
+    '/' : {experimentalNoScripts: true}
   }
 });
