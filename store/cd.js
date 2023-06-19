@@ -73,7 +73,8 @@ export const useCDStore = defineStore({
         },
        async getCDTreeHistory(value){
             let baseURL = useRuntimeConfig().public.baseURL;
-            this.cdTreeHistory = await $fetch(`${baseURL}/api/cd?active_cd=${value.value}`)
+            const { data } = await useFetch(`${baseURL}/api/cd?active_cd=${value.value}`);
+            this.cdTreeHistory = data;
         }
        
     },

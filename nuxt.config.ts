@@ -12,9 +12,7 @@ export default defineNuxtConfig({
       mapToken: '',
     },
   },
-  app: {
-    head: {
-      link: [{ rel: 'stylesheet', href: 'https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' }]
-    }
+  routeRules:{
+    '/' : {prerender: true}
   }
 });

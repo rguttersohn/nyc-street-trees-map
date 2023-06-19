@@ -30,7 +30,8 @@ import treeIcon from '~/assets/img/tree.svg';
     let {activeCD} = storeToRefs(cdStore);
 
     onMounted(() => renderMap(mapGlobals.value, getActiveCDCoords));
-    
+    getCDTreeHistory(activeCD);
+
     watch(mapLoaded, ()=>{
       getTreeData();
       renderCDMap(mapGlobals.value, cdStore);
